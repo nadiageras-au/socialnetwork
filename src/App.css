@@ -17,14 +17,14 @@
 
 }
 
-.nav {
-    grid-area: n;
-    background-color: #b26f4a;
-}
+/*.nav {*/
+/*    grid-area: n;*/
+/*    background-color: #b26f4a;*/
+/*}*/
 
 .content {
     grid-area: c;
-    background-color: #e9fffd;
+
 }
 
 .bgContent {
