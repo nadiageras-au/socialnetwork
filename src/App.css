@@ -22,11 +22,6 @@
 /*    background-color: #b26f4a;*/
 /*}*/
 
-.content {
-    grid-area: c;
-
-}
-
 .bgContent {
     max-height: 180px;
     width: 100%;

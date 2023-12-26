@@ -9,12 +9,12 @@ export const Navbar = () => {
     return (
         <WrapperSidebarNavbar>
             <nav className='nav'>
-                <NavbarItem iconId="user" width='24px' height='24px' title='Profile'/>
-                <NavbarItem iconId="list_right" width='24px' height='24px' title='News'/>
-                <NavbarItem iconId="messages" width='23px' height='18px' title='Messages'/>
-                <NavbarItem iconId="calendar" width='24px' height='24px' title='Events'/>
-                <NavbarItem iconId="groups" width='24px' height='24px' title='Groups'/>
-                <NavbarItem iconId="settings" width='24px' height='24px' title='Settings'/>
+                <NavbarItem iconId="user" width='24px' height='24px' title='Profile' isActive={true}/>
+                <NavbarItem iconId="list_right" width='24px' height='24px' title='News' isActive={false}/>
+                <NavbarItem iconId="messages" width='23px' height='18px' title='Messages' isActive={false}/>
+                <NavbarItem iconId="calendar" width='24px' height='24px' title='Events' isActive={false}/>
+                <NavbarItem iconId="groups" width='24px' height='24px' title='Groups' isActive={false}/>
+                <NavbarItem iconId="settings" width='24px' height='24px' title='Settings' isActive={false}/>
             </nav>
         </WrapperSidebarNavbar>
 
