@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image} from '../image/Image.styled'
+import {Image} from '../../components/image/Image.styled'
 import {MyPosts} from "./myPosts/MyPosts";
 import styled from "styled-components";
 import {Button, Form, Input} from 'antd';

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navbar} from "../navbar/Navbar";
-import {UserInfo} from "../userInfo/UserInfo";
+import {UserInfo} from "../../components/userInfo/UserInfo";
 import styled from "styled-components";
 
 export const Sidebar = () => {

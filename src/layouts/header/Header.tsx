@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Logo} from "../logo/Logo";
+import {Logo} from "../../components/logo/Logo";
 import imgSrc from "../../assets/images/logo.svg"
 
 export const Header = () => {

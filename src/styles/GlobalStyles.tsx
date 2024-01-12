@@ -24,14 +24,14 @@ export const GlobalStyle = createGlobalStyle`
     background-color: rebeccapurple;
   }
 
-  // a {
-  //   text-decoration: none;
-  //  
-  //  
-  //   &:hover {
-  //     
-  //   }
-  // }
+   a {
+     text-decoration: none;
+    
+    
+     &:hover {
+       //box-shadow: 0 0 0 10px yellow;
+     }
+   }
 
   ul,
   li,
