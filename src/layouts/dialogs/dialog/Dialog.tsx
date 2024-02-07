@@ -9,7 +9,7 @@ export const DialogItem:React.FC<DialogItemProps> = (props) => {
     let path= "/dialogs/" +props.id
     return (
         <div>
-            <NavLink to={path}>{props.name}</NavLink>
+            <NavLink to={path}>{props.name} this is test</NavLink>
         </div>
     );
 };
