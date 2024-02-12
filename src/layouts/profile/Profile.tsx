@@ -9,6 +9,8 @@ import {theme} from "../../styles/Theme.styled";
 import sendIcon from '../../assets/images/icons/send.svg'
 import photoIcon from '../../assets/images/icons/addPicture.svg'
 import videoIcon from '../../assets/images/icons/addVideo.svg.svg'
+import {PostPropsType} from "./myPosts/post/Post";
+
 
 
 
@@ -17,7 +19,14 @@ import videoIcon from '../../assets/images/icons/addVideo.svg.svg'
 //     name: string
 //     placeholder: string
 // }
-export const Profile = () => {
+
+type ProfileStateProps = {
+    posts: Array<PostPropsType>
+}
+type ProfileProps = {
+    state:ProfileStateProps
+}
+export const Profile = (props:ProfileProps) => {
     // const imgLink = "https://img.razrisyika.ru/kart/136/544000-fotografiy-v-horoshem-kachestve-26.jpg"
     // const avatarLink = "https://getwallpapers.com/wallpaper/full/5/4/c/1437228-free-kawaii-fox-wallpaper-1920x1200-xiaomi.jpg"
 
@@ -42,7 +51,7 @@ export const Profile = () => {
                 </StyledForm>
             </AddPost>
 
-            <MyPosts/>
+            <MyPosts posts={props.state.posts}/>
         </div>
     );
 };

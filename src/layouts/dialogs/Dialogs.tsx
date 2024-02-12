@@ -1,24 +1,56 @@
 import React from 'react';
 import styled from "styled-components";
-import {DialogItem} from "./dialog/Dialog";
-import {Message} from "./message/Message";
+import {DialogItem, DialogItemProps} from "./dialog/Dialog";
+import {Message, MessageProps} from "./message/Message";
+import {DialogsPageStateProps} from "../../App";
 
-export const Dialogs = () => {
+// type DialogsStateProps = {
+//     dialogs: Array<DialogItemProps>
+//     messages: Array<MessageProps>
+// }
+type DialogsProps = {
+    state:DialogsPageStateProps
+}
+export const Dialogs = (props:DialogsProps) => {
+
+    // let dialogsData = [
+    //     {id:1, name: 'Chewbacca'},
+    //     {id:2, name: 'R2d2'},
+    //     {id:3, name: 'Luke'},
+    //     {id:4, name: 'Leia'},
+    //     {id:5, name: 'Jedi'},
+    // ]
+    //
+    // let messsagesData = [
+    //     {id:1, message: 'Hi!'},
+    //     {id:2, message: 'How are you, bro?!'},
+    //     {id:3, message: 'Yooo!'},
+    //     {id:4, message: 'Cool!'},
+    //
+    // ]
+
     return (
         <StyledDialogs>
             <DialogsList>
-                <DialogItem name="Chewbacca" id="1"/>
-                <DialogItem name="R2d2" id="2"/>
-                <DialogItem name="Luke" id="3"/>
-                <DialogItem name="Leia" id="4"/>
-                <DialogItem name="Jedi" id="5"/>
+                console.log(props.state.dialogs);
+                {
+
+                    props.state.dialogs.map(el=> {
+                        return <DialogItem name={el.name} id={el.id} key={el.id}/>
+
+                    })
+                }
+
+
 
             </DialogsList>
             <Messages>
-                <Message text="Hi!"/>
-                <Message text="How are you, bro?!"/>
-                <Message text="Yo!"/>
-                <Message text="Cool!"/>
+                {
+                    props.state.messages.map(msg => {
+                        return  <Message message={msg.message} key={msg.id} id={msg.id}/>
+                    })
+                }
+
             </Messages>
         </StyledDialogs>
     );

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./layouts/header/Header";
-// import {Navbar} from "./components/navbar/Navbar";
 import {Profile} from "./layouts/profile/Profile";
 import {Sidebar} from "./layouts/sidebar/Sidebar";
 import {Dialogs} from "./layouts/dialogs/Dialogs";
@@ -10,17 +9,36 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./layouts/news/News";
 import {Events} from "./layouts/events/Events";
 import {Settings} from "./layouts/settings/Settings";
+import {PostPropsType} from "./layouts/profile/myPosts/post/Post";
+import {DialogItemProps} from "./layouts/dialogs/dialog/Dialog";
+import {MessageProps} from "./layouts/dialogs/message/Message";
 
+export type DialogsPageStateProps = {
+    dialogs:Array<DialogItemProps>
+    messages: Array<MessageProps>
+}
+export type ProfilesPageStateProps = {
+    posts: Array<PostPropsType>
+}
 
-function App() {
+type StateProps = {
+    dialogsPage: Array<DialogsPageStateProps>
+    profilePage: Array<ProfilesPageStateProps>
+}
+
+type AppProps = any & {
+    state: StateProps
+}
+
+function App(props:AppProps) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Sidebar/>
                 <WrapperContent>
-                    <Route exact path='/dialogs' component={Dialogs}/>
-                    <Route path='/profile' component={Profile}/>
+                    <Route exact path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />}/>
+                    <Route path='/profile' render={() => <Profile state={props.state.profilePage}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/events' component={Events}/>
                     <Route path='/settings' component={Settings}/>

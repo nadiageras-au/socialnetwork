@@ -3,14 +3,12 @@ import styled from "styled-components";
 import {Icon} from "../../../../components/icon/IconSVG";
 import {Image} from "../../../../components/image/Image.styled"
 import avatar from '../../../../assets/images/avatars/jediObiWan.png'
-import madiaPost from '../../../../assets/images/photos/post01.jpg'
-import imgPost1 from "../../../../assets/images/photos/post01.jpg";
 
-
-type PostPropsType = {
+export type PostPropsType = {
+    id:number
     text: string
     media: string
-    postdateinfo: string
+    postDateInfo: string
     like: string
     comment: string
     share: string
@@ -24,7 +22,7 @@ export const Post = (props: PostPropsType) => {
                     <AvatarImg src={avatar}/>
                     <MetaData>
                         <PostAuthorName>Obi-Wan Kenobi</PostAuthorName>
-                        <Timeinfo>{props.postdateinfo}</Timeinfo>
+                        <Timeinfo>{props.postDateInfo}</Timeinfo>
                     </MetaData>
 
                 </WrapperLeft>

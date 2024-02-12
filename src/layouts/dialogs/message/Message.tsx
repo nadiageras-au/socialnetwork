@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
 
-type MessageProps = {
-    text: string
+export type MessageProps = {
+    id:number
+    message: string
 }
-export const Message:React.FC<MessageProps> = ({text}) => {
+export const Message:React.FC<MessageProps> = ({id,message}) => {
     return (
         <StyledMessage>
-            {text}
+            {message}
         </StyledMessage>
     );
 };
