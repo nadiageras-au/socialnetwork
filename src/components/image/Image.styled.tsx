@@ -4,6 +4,7 @@ type StyledImage = {
     src: string
     width?: string
     height?: string
+
 }
 
 export const Image = styled.img<StyledImage>`

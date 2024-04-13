@@ -5,7 +5,7 @@ import {Image} from "../../../../components/image/Image.styled"
 import avatar from '../../../../assets/images/avatars/jediObiWan.png'
 
 export type PostPropsType = {
-    id:number
+    id: number
     text: string
     media: string
     postDateInfo: string
@@ -15,7 +15,7 @@ export type PostPropsType = {
 }
 export const Post = (props: PostPropsType) => {
 
-  return (
+    return (
         <StyledPost>
             <PostHeader>
                 <WrapperLeft>
@@ -28,12 +28,17 @@ export const Post = (props: PostPropsType) => {
                 </WrapperLeft>
 
                 <Bookmark>
-                    <Icon iconId='bookmark'/>
+                    <Icon iconId='dots'/>
                 </Bookmark>
 
             </PostHeader>
             <section>{props.text}</section>
-            <section><Image src={props.media}/></section>
+            {props.media ?
+                <section><Image src={props.media}/></section>
+                : ''
+            }
+            {/*<section><Image src={props.media}/></section>*/}
+
             <PostFooter>
                 <FooterItemPostInfo>
                     <Icon iconId="heart" width="35" height="24"/>
@@ -66,27 +71,27 @@ const StyledPost = styled.article`
 `
 
 const PostHeader = styled.header`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `
 
 const WrapperLeft = styled.div`
-display: flex;
-justify-content: space-between;
-max-width: 50%;
-align-items: center;`
+  display: flex;
+  justify-content: space-between;
+  max-width: 50%;
+  align-items: center;`
 
 const AvatarImg = styled(Image)`
-height: 70px;
+  height: 70px;
   width: auto;
 `
 
 const MetaData = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: start;`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;`
 
 const PostAuthorName = styled.h3`
   font-family: Poppins;
@@ -98,7 +103,7 @@ const PostAuthorName = styled.h3`
 `
 
 const Timeinfo = styled.span`
-  color:  #A0A0A0;
+  color: #A0A0A0;
   font-family: Poppins;
   font-size: 16px;
   line-height: 1.5; /* 24px */
@@ -109,13 +114,13 @@ const Bookmark = styled.div`
 `
 
 const PostFooter = styled.footer`
-display: flex;
-flex-direction: row;
-justify-content: flex-start;
-gap: 12px;`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 12px;`
 
 const FooterItemPostInfo = styled.div`
-display: flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
 `

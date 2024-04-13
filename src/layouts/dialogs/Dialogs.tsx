@@ -1,17 +1,25 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import styled from "styled-components";
-import {DialogItem, DialogItemProps} from "./dialog/Dialog";
+import {AvatarImg, DialogItem, DialogItemProps} from "./dialog/Dialog";
 import {Message, MessageProps} from "./message/Message";
-import {DialogsPageStateProps} from "../../App";
+// import {DialogsPageStateProps} from "../../App";
+//заглушка
+import darth from "./../../assets/images/avatars/darth_vader_icon.png";
+import {FlexWrapper} from "../../components/wrappers/FlexWrapper";
 
-// type DialogsStateProps = {
-//     dialogs: Array<DialogItemProps>
+
+// export type DialogsPageStateProps = {
+//     dialogs:Array<DialogItemProps>
 //     messages: Array<MessageProps>
 // }
-type DialogsProps = {
-    state:DialogsPageStateProps
+export type DialogsStateProps = {
+    dialogs: Array<DialogItemProps>
+    messages: Array<MessageProps>
 }
-export const Dialogs = (props:DialogsProps) => {
+export type DialogsProps = {
+    state:DialogsStateProps
+}
+export const Dialogs = ({state}:DialogsProps) => {
 
     // let dialogsData = [
     //     {id:1, name: 'Chewbacca'},
@@ -29,14 +37,23 @@ export const Dialogs = (props:DialogsProps) => {
     //
     // ]
 
+
+    let newPostElement = useRef<HTMLTextAreaElement>(null);
+    const addPost = () => {
+        debugger;
+        if (newPostElement.current !== null) {
+            alert(newPostElement.current.value)
+            // alert(newPostElement.current.resizableTextArea.textArea.value)
+        }
+    }
+
     return (
         <StyledDialogs>
             <DialogsList>
-                console.log(props.state.dialogs);
                 {
 
-                    props.state.dialogs.map(el=> {
-                        return <DialogItem name={el.name} id={el.id} key={el.id}/>
+                    state.dialogs.map(el=> {
+                        return <DialogItem name={el.name} id={el.id} key={el.id} avatar={el.avatar}/>
 
                     })
                 }
@@ -44,14 +61,30 @@ export const Dialogs = (props:DialogsProps) => {
 
 
             </DialogsList>
-            <Messages>
-                {
-                    props.state.messages.map(msg => {
-                        return  <Message message={msg.message} key={msg.id} id={msg.id}/>
-                    })
-                }
+            <FlexWrapperDialogs>
+                <Messages>
+                    {
+                        state.messages.map(msg => {
 
-            </Messages>
+                            return <>
+                                {/*<AvatarImg src={state.dialogs.filter((el) => {*/}
+                                {/*    el.id === msg.id ? el.avatar : darth*/}
+                                {/*})} height='50px' width='50px'/>*/}
+
+                                <AvatarImg src={darth} height='50px' width='50px'/>
+                                <Message message={msg.message} key={msg.id} id={msg.id}/>
+
+
+                            </>
+                        })
+                    }
+
+                </Messages>
+
+                <textarea ref={newPostElement}></textarea>
+                <button onClick={addPost}>Add</button>
+            </FlexWrapperDialogs>
+
         </StyledDialogs>
     );
 };
@@ -86,5 +119,14 @@ const Messages = styled.div`
   gap: 30px;
   background-color: #f9e0ff;
   width: 70%;
+`
+export const FlexWrapperDialogs = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
 `
 

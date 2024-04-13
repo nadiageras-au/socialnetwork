@@ -13,36 +13,11 @@ import {Post, PostPropsType} from "./post/Post";
 //
 // const text3 = "Captain. Yes, sir? Tell them we wish to board at once. With all due respect, the Ambassadors for the Supreme Chancellor wish to board immediately. Yes, yes, of course, as you know, our blockade is perfectly legal, and we'd be happy to receive the Ambassador. Noooo! No given up General Ja Ja. Wesa tink of sometin. Hands up! My giv up. My giv up. There's always a bigger fish. The invasion is on schedule, My Lord. I have the Senate bogged down in procedures. They will have no choice but to accept your control of the system."
 
-type MyPostsType = {
+export type MyPostsType = {
     posts: Array<PostPropsType>
 }
 export const MyPosts = (props:MyPostsType) => {
 
-    // let postsData: PostPropsType[] = [
-    //     {
-    //         id: 1, text: "Lock on to him, R2. Master, General Grievous's ship is directly",
-    //         media: imgPost1,
-    //         postDateInfo: "20 hours ago",
-    //         like: "15",
-    //         comment: "3",
-    //         share: '18'
-    //     },
-    //     {id: 2,
-    //         text: text2,
-    //         media: imgPost2,
-    //         postDateInfo: "3 days",
-    //         like: "25", comment: "8",
-    //         share: '1'},
-    //     {
-    //         id: 3,
-    //         text: text3 ,
-    //         media: imgPost3_0,
-    //         postDateInfo: "1 week",
-    //         like: "38",
-    //         comment: "10",
-    //         share: '34'
-    //     },
-    // ]
 
     return (
         <StyledPosts>

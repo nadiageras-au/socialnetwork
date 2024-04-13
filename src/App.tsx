@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./layouts/header/Header";
-import {Profile} from "./layouts/profile/Profile";
+import {Profile, ProfileStateProps} from "./layouts/profile/Profile";
 import {Sidebar} from "./layouts/sidebar/Sidebar";
-import {Dialogs} from "./layouts/dialogs/Dialogs";
+import {Dialogs, DialogsProps, DialogsStateProps} from "./layouts/dialogs/Dialogs";
 import styled from "styled-components";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./layouts/news/News";
@@ -13,22 +13,27 @@ import {PostPropsType} from "./layouts/profile/myPosts/post/Post";
 import {DialogItemProps} from "./layouts/dialogs/dialog/Dialog";
 import {MessageProps} from "./layouts/dialogs/message/Message";
 
-export type DialogsPageStateProps = {
-    dialogs:Array<DialogItemProps>
-    messages: Array<MessageProps>
-}
-export type ProfilesPageStateProps = {
-    posts: Array<PostPropsType>
-}
 
-type StateProps = {
-    dialogsPage: Array<DialogsPageStateProps>
-    profilePage: Array<ProfilesPageStateProps>
-}
+// export type ProfilesPageStateProps = {
+//     posts: Array<PostPropsType>
+// }
 
 type AppProps = any & {
-    state: StateProps
+    state: {
+        dialogsPage: DialogsStateProps
+        profilePage: ProfileStateProps
+    }
+    addPost: (text:string)=> void
+    onChangePostValue: (text:string) => void
 }
+
+// type StateProps = {
+//     state: {
+//         dialogsPage: DialogsProps
+//         profilePage: ProfileStateProps
+//     }
+//
+// }
 
 function App(props:AppProps) {
     return (
@@ -37,8 +42,12 @@ function App(props:AppProps) {
                 <Header/>
                 <Sidebar/>
                 <WrapperContent>
+                    {/*<Route exact path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />}/>*/}
                     <Route exact path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />}/>
-                    <Route path='/profile' render={() => <Profile state={props.state.profilePage}/>}/>
+                    <Route path='/profile' render={() => <Profile
+                        state={props.state.profilePage}
+                        addPost={props.addPost}
+                        onChangePostValue={props.onChangePostValue}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/events' component={Events}/>
                     <Route path='/settings' component={Settings}/>

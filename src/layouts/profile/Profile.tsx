@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent, forwardRef, useRef} from 'react';
 import {Image} from '../../components/image/Image.styled'
 import {MyPosts} from "./myPosts/MyPosts";
 import styled from "styled-components";
@@ -12,32 +12,48 @@ import videoIcon from '../../assets/images/icons/addVideo.svg.svg'
 import {PostPropsType} from "./myPosts/post/Post";
 
 
-
-
 // type PostTextareaPropsType =
 // {
 //     name: string
 //     placeholder: string
 // }
 
-type ProfileStateProps = {
+type TextAreaType = {
+    ref: any
+}
+export type ProfileStateProps = {
+    newValueForPost: string
     posts: Array<PostPropsType>
 }
-type ProfileProps = {
-    state:ProfileStateProps
+export type ProfileProps = {
+    state: ProfileStateProps
+    addPost: (text:string)=> void
+    onChangePostValue:(newPost: string)=>void
 }
-export const Profile = (props:ProfileProps) => {
-    // const imgLink = "https://img.razrisyika.ru/kart/136/544000-fotografiy-v-horoshem-kachestve-26.jpg"
-    // const avatarLink = "https://getwallpapers.com/wallpaper/full/5/4/c/1437228-free-kawaii-fox-wallpaper-1920x1200-xiaomi.jpg"
+export const Profile = (props: ProfileProps) => {
 
-    // @ts-ignore
+    //let newPostElement = useRef<HTMLTextAreaElement>(null);
+
+    const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        //debugger;
+        props.onChangePostValue(e.currentTarget.value)
+    }
+    const addPostHandler = () => {
+        //debugger;
+       // if (newPostElement.current !== null) {
+            //props.addPost(newPostElement.current.value)
+            props.addPost(props.state.newValueForPost)
+        //}
+    }
+    // name="post-text"
     return (
         <div>
             <AddPost>
                 <StyledForm action="/" method="post">
-                    <StyledTextArea
-                    name="post-text" placeholder="Create a new post ..."></StyledTextArea>
-
+                    {/*<StyledTextArea ref={newPostElement}/>*/}
+                   {/*<textarea ref={newPostElement} value={props.state.newValueForPost}/>*/}
+                   <textarea value={props.state.newValueForPost} onChange={onChangeHandler}/>
+                    <button onClick={addPostHandler}>Add</button>
                     <AddPostBtns>
                         <label htmlFor="addPostFile">
                             <InputBtn type="button"/>
@@ -71,7 +87,8 @@ const AddPost = styled.div`
 `
 
 const StyledForm = styled(Form)`
-display: flex;`
+  display: flex;`
+
 
 const StyledTextArea = styled(TextArea)`
   display: block;
@@ -84,6 +101,7 @@ const StyledTextArea = styled(TextArea)`
   line-height: 1.5;
   color: #757575;
   font-family: inherit;`
+
 
 const SendPostButton = styled(Button)`
   width: 50px;
