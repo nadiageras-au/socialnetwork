@@ -15,7 +15,7 @@ import {DialogItemProps} from "../layouts/dialogs/dialog/Dialog";
 import {MessageProps} from "../layouts/dialogs/message/Message";
 import {PostPropsType} from "../layouts/profile/myPosts/post/Post";
 import {rerenderEntireTree} from "../index";
-import {ADD_POST, ON_CHANGE_POST_VALUE} from "../helpers/actionsTypes";
+import {ADD_MESSAGE, ADD_POST, ON_CHANGE_MESSAGE_VALUE, ON_CHANGE_POST_VALUE} from "../helpers/actionsTypes";
 
 
 export type MainStateType = {
@@ -185,6 +185,16 @@ export let store: StoreType = {
             console.log(this._state.profilePage.newValueForPost)
             this._state.profilePage.newValueForPost = action.newText;
 
+        } else  if (action.type === ADD_MESSAGE) {
+            let newMsg = {
+                id: 101, message: this._state.dialogsPage.newMsg
+            }
+            this._state.dialogsPage.messages.unshift(newMsg);
+            this._state.dialogsPage.newMsg = ''
+
+        } else  if (action.type === ON_CHANGE_MESSAGE_VALUE) {
+            console.log(this._state.dialogsPage.newMsg)
+            this._state.dialogsPage.newMsg = action.text;
         }
 
         this._callSubscriber(this._state)

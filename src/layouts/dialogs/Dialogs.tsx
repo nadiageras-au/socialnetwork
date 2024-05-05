@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {ChangeEvent, useRef} from 'react';
 import styled from "styled-components";
 import {AvatarImg, DialogItem, DialogItemProps} from "./dialog/Dialog";
 import {Message, MessageProps} from "./message/Message";
@@ -6,6 +6,7 @@ import {Message, MessageProps} from "./message/Message";
 //заглушка
 import darth from "./../../assets/images/avatars/darth_vader_icon.png";
 import {FlexWrapper} from "../../components/wrappers/FlexWrapper";
+import {ADD_MESSAGE, ON_CHANGE_MESSAGE_VALUE, ON_CHANGE_POST_VALUE} from "../../helpers/actionsTypes";
 
 
 // export type DialogsPageStateProps = {
@@ -19,25 +20,23 @@ export type DialogsStateProps = {
 }
 export type DialogsProps = {
     state:DialogsStateProps
-    addMsg: ()=>void
-    onChangeMsgValue: ()=>void
+    // addMsg: ()=>void
+    // onChangeMsgValue: ()=>void
+    dispatch: (action:any) => void
 }
-export const Dialogs = ({state}:DialogsProps) => {
+export const Dialogs = ({state, dispatch}:DialogsProps) => {
 
     //let newPostElement = useRef<HTMLTextAreaElement>(null);
-    const onNewMessageChange = () => {
-        debugger;
+    const onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        dispatch({type:ON_CHANGE_MESSAGE_VALUE, text: e.currentTarget.value})
         // if (newPostElement.current !== null) {
         //     alert(newPostElement.current.value)
         //     // alert(newPostElement.current.resizableTextArea.textArea.value)
         // }
     }
+
     const onSendMsgClick = () => {
-        debugger;
-        // if (newPostElement.current !== null) {
-        //     alert(newPostElement.current.value)
-        //     // alert(newPostElement.current.resizableTextArea.textArea.value)
-        // }
+      dispatch({type:ADD_MESSAGE})
     }
 
     return (

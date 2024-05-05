@@ -28,8 +28,8 @@ export type ProfileStateProps = {
 }
 export type ProfileProps = {
     state: ProfileStateProps
-    addPost: (text:string)=> void
-    onChangePostValue:(newPost: string)=>void
+    // addPost: (text:string)=> void
+    // onChangePostValue:(newPost: string)=>void
     dispatch: (action:any) => void
 }
 export const Profile = (props: ProfileProps) => {
