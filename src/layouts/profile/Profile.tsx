@@ -10,6 +10,7 @@ import sendIcon from '../../assets/images/icons/send.svg'
 import photoIcon from '../../assets/images/icons/addPicture.svg'
 import videoIcon from '../../assets/images/icons/addVideo.svg.svg'
 import {PostPropsType} from "./myPosts/post/Post";
+import {ADD_POST, ON_CHANGE_POST_VALUE} from "../../helpers/actionsTypes";
 
 
 // type PostTextareaPropsType =
@@ -29,21 +30,23 @@ export type ProfileProps = {
     state: ProfileStateProps
     addPost: (text:string)=> void
     onChangePostValue:(newPost: string)=>void
+    dispatch: (action:any) => void
 }
 export const Profile = (props: ProfileProps) => {
 
     //let newPostElement = useRef<HTMLTextAreaElement>(null);
 
-    const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        //debugger;
-        props.onChangePostValue(e.currentTarget.value)
-    }
+
     const addPostHandler = () => {
         //debugger;
        // if (newPostElement.current !== null) {
             //props.addPost(newPostElement.current.value)
-            props.addPost(props.state.newValueForPost)
+            props.dispatch({type:ADD_POST,text: props.state.newValueForPost})
         //}
+    }
+
+    const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch({type:ON_CHANGE_POST_VALUE,newText:e.currentTarget.value})
     }
     // name="post-text"
     return (

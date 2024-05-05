@@ -25,6 +25,9 @@ type AppProps = any & {
     }
     addPost: (text:string)=> void
     onChangePostValue: (text:string) => void
+    addMsg: (text:string)=> void
+    onChangeMsgValue: (text:string) => void
+    dispatch: (action:any) => void
 }
 
 // type StateProps = {
@@ -43,11 +46,17 @@ function App(props:AppProps) {
                 <Sidebar/>
                 <WrapperContent>
                     {/*<Route exact path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />}/>*/}
-                    <Route exact path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />}/>
+                    <Route exact path='/dialogs' render={() => <Dialogs
+                        state={props.state.dialogsPage}
+                        addMsg={props.addMsg}
+                        onChangeMsgValue={props.onChangePostValue}/>}/>
+
                     <Route path='/profile' render={() => <Profile
+                        dispatch={props.dispatch}
                         state={props.state.profilePage}
                         addPost={props.addPost}
                         onChangePostValue={props.onChangePostValue}/>}/>
+
                     <Route path='/news' component={News}/>
                     <Route path='/events' component={Events}/>
                     <Route path='/settings' component={Settings}/>

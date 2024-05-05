@@ -15,51 +15,39 @@ import {FlexWrapper} from "../../components/wrappers/FlexWrapper";
 export type DialogsStateProps = {
     dialogs: Array<DialogItemProps>
     messages: Array<MessageProps>
+
 }
 export type DialogsProps = {
     state:DialogsStateProps
+    addMsg: ()=>void
+    onChangeMsgValue: ()=>void
 }
 export const Dialogs = ({state}:DialogsProps) => {
 
-    // let dialogsData = [
-    //     {id:1, name: 'Chewbacca'},
-    //     {id:2, name: 'R2d2'},
-    //     {id:3, name: 'Luke'},
-    //     {id:4, name: 'Leia'},
-    //     {id:5, name: 'Jedi'},
-    // ]
-    //
-    // let messsagesData = [
-    //     {id:1, message: 'Hi!'},
-    //     {id:2, message: 'How are you, bro?!'},
-    //     {id:3, message: 'Yooo!'},
-    //     {id:4, message: 'Cool!'},
-    //
-    // ]
-
-
-    let newPostElement = useRef<HTMLTextAreaElement>(null);
-    const addPost = () => {
+    //let newPostElement = useRef<HTMLTextAreaElement>(null);
+    const onNewMessageChange = () => {
         debugger;
-        if (newPostElement.current !== null) {
-            alert(newPostElement.current.value)
-            // alert(newPostElement.current.resizableTextArea.textArea.value)
-        }
+        // if (newPostElement.current !== null) {
+        //     alert(newPostElement.current.value)
+        //     // alert(newPostElement.current.resizableTextArea.textArea.value)
+        // }
+    }
+    const onSendMsgClick = () => {
+        debugger;
+        // if (newPostElement.current !== null) {
+        //     alert(newPostElement.current.value)
+        //     // alert(newPostElement.current.resizableTextArea.textArea.value)
+        // }
     }
 
     return (
         <StyledDialogs>
             <DialogsList>
                 {
-
                     state.dialogs.map(el=> {
                         return <DialogItem name={el.name} id={el.id} key={el.id} avatar={el.avatar}/>
-
                     })
                 }
-
-
-
             </DialogsList>
             <FlexWrapperDialogs>
                 <Messages>
@@ -73,18 +61,18 @@ export const Dialogs = ({state}:DialogsProps) => {
 
                                 <AvatarImg src={darth} height='50px' width='50px'/>
                                 <Message message={msg.message} key={msg.id} id={msg.id}/>
-
-
                             </>
                         })
                     }
 
                 </Messages>
-
-                <textarea ref={newPostElement}></textarea>
-                <button onClick={addPost}>Add</button>
+                {/*<textarea ref={newPostElement}></textarea>*/}
+                <textarea
+                    // value={newMessageBody}
+                onChange={onNewMessageChange}
+                placeholder={'Enter your message'}></textarea>
+                <button onClick={onSendMsgClick}>Send</button>
             </FlexWrapperDialogs>
-
         </StyledDialogs>
     );
 };

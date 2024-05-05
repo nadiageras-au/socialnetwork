@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {GlobalStyle} from "./styles/GlobalStyles";
-import {MainStateType, store, StoreType} from "./redux/State"
+import {MainStateType, store, StoreType} from "./redux/state"
 //import {addPost} from "./redux/State";
 
 // type PropsType = {
@@ -18,7 +18,12 @@ import {MainStateType, store, StoreType} from "./redux/State"
     ReactDOM.render(
         <>
             <GlobalStyle/>
-            <App state={state} addPost={store.addPost.bind(store)} onChangePostValue={store.onChangePostValue.bind(store)}/>
+            <App state={state}
+                 dispatch={store.dispatch.bind(store)}
+                 // addPost={store.addPost.bind(store)}
+                 addMsg={store.addMsg.bind(store)}
+                 // onChangePostValue={store.onChangePostValue.bind(store)}
+                 onChangeMsgValue={store.onChangeMsgValue.bind(store)}/>
         </>,
         document.getElementById('root')
     );
