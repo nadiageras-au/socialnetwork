@@ -18,7 +18,6 @@ export type ProfileStateProps = {
 export type ProfileProps = {
     posts: Array<PostPropsType>
     newValueForPost:string
-    // dispatch: (action:any) => void
     addPost: ()=>void
     updateNewPostText: (text:string)=>void
 }

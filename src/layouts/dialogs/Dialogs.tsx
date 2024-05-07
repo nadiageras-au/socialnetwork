@@ -13,34 +13,36 @@ export type DialogsStateProps = {
 
 }
 export type DialogsProps = {
-    state: DialogsStateProps
-    dispatch: (action: any) => void
+    newMsgValue: string
+    dialogs: Array<DialogItemProps>
+    messages: Array<MessageProps>
+    updateNewMessageBody: (text: string) => void
+    addMessage: () => void
+    // dispatch: (action: any) => void
 }
-export const Dialogs = ({state, dispatch}: DialogsProps) => {
+export const Dialogs = ({newMsgValue, dialogs, messages, updateNewMessageBody,addMessage}: DialogsProps) => {
 
-    let dialogsElements = state.dialogs.length
-        ? state.dialogs.map(el => {
-        return <DialogItem name={el.name} id={el.id} key={el.id} avatar={el.avatar}/>
-    })
+    let dialogsElements = dialogs.length
+        ? dialogs.map(el => {
+            return <DialogItem name={el.name} id={el.id} key={el.id} avatar={el.avatar}/>
+        })
         : <div>No Dialogs Yet</div>
-    let messagesElements = state.messages.length
-    ? state.messages.map(msg => {
-        return <>
-            <AvatarImg src={darth} height='50px' width='50px'/>
-            <Message message={msg.message} key={msg.id} id={msg.id}/>
-        </>
-    })
+    let messagesElements = messages.length
+        ? messages.map(msg => {
+            return <>
+                <AvatarImg src={darth} height='50px' width='50px'/>
+                <Message message={msg.message} key={msg.id} id={msg.id}/>
+            </>
+        })
         : <div>No Messages yet</div>
 
 
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // dispatch({type: ON_CHANGE_MESSAGE_VALUE, text: e.currentTarget.value})
-        dispatch(changeMessageValueActionCreator(e.currentTarget.value))
+        updateNewMessageBody(e.currentTarget.value)
     }
 
     const onSendMsgClick = () => {
-        // dispatch({type: ADD_MESSAGE})
-        dispatch(addMessageActionCreator(state.newMsg))
+        addMessage()
     }
 
     return (
@@ -54,7 +56,8 @@ export const Dialogs = ({state, dispatch}: DialogsProps) => {
                 </Messages>
                 <textarea
                     onChange={onNewMessageChange}
-                    placeholder={'Enter your message'}></textarea>
+                    placeholder={'Enter your message'}
+                    value={newMsgValue}></textarea>
                 <button onClick={onSendMsgClick}>Send</button>
             </FlexWrapperDialogs>
         </StyledDialogs>

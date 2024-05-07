@@ -13,6 +13,7 @@ import {PostPropsType} from "./layouts/profile/myPosts/post/Post";
 import {DialogItemProps} from "./layouts/dialogs/dialog/Dialog";
 import {MessageProps} from "./layouts/dialogs/message/Message";
 import {ProfileContainer} from "./layouts/profile/ProfileContainer";
+import {DialogsContainer} from "./layouts/dialogs/DialogsContainer";
 
 
 // export type ProfilesPageStateProps = {
@@ -46,10 +47,9 @@ function App(props:AppProps) {
                 <Header/>
                 <Sidebar/>
                 <WrapperContent>
-                    <Route exact path='/dialogs' render={() => <Dialogs
+                    <Route exact path='/dialogs' render={() => <DialogsContainer
                         dispatch={props.dispatch}
                         state={props.state.dialogsPage}
-
                     />}/>
 
                     <Route path='/profile' render={() => <ProfileContainer

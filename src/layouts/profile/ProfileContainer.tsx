@@ -10,7 +10,7 @@ export type ProfileStateProps = {
 export type ProfileProps = {
     newValueForPost: string
     posts: Array<PostPropsType>
-    dispatch: (action:any) => void
+    dispatch: (action: any) => void
 }
 export const ProfileContainer = (props: ProfileProps) => {
 
@@ -19,15 +19,15 @@ export const ProfileContainer = (props: ProfileProps) => {
         props.dispatch(addPostActionCreator())
     }
 
-    const onChangePostValueHandler = (text:string) => {
+    const onChangePostValueHandler = (text: string) => {
         props.dispatch(changePostValueActionCreator(text))
     }
 
     return (
-       <Profile updateNewPostText={onChangePostValueHandler}
-                addPost={addPost}
-                newValueForPost={props.newValueForPost}
-       posts={props.posts}/>
+        <Profile updateNewPostText={onChangePostValueHandler}
+                 addPost={addPost}
+                 newValueForPost={props.newValueForPost}
+                 posts={props.posts}/>
     );
 };
 

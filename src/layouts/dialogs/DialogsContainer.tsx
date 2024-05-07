@@ -5,6 +5,7 @@ import {Message, MessageProps} from "./message/Message";
 import darth from "./../../assets/images/avatars/darth_vader_icon.png";
 import {ADD_MESSAGE, ON_CHANGE_MESSAGE_VALUE, ON_CHANGE_POST_VALUE} from "../../helpers/actionsTypes";
 import {addMessageActionCreator, changeMessageValueActionCreator} from "../../redux/dialogsPage-reducer";
+import {Dialogs} from "./Dialogs";
 
 export type DialogsStateProps = {
     dialogs: Array<DialogItemProps>
@@ -16,49 +17,19 @@ export type DialogsProps = {
     state: DialogsStateProps
     dispatch: (action: any) => void
 }
-export const Dialogs = ({state, dispatch}: DialogsProps) => {
-
-    let dialogsElements = state.dialogs.length
-        ? state.dialogs.map(el => {
-        return <DialogItem name={el.name} id={el.id} key={el.id} avatar={el.avatar}/>
-    })
-        : <div>No Dialogs Yet</div>
-    let messagesElements = state.messages.length
-    ? state.messages.map(msg => {
-        return <>
-            <AvatarImg src={darth} height='50px' width='50px'/>
-            <Message message={msg.message} key={msg.id} id={msg.id}/>
-        </>
-    })
-        : <div>No Messages yet</div>
-
-
-    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // dispatch({type: ON_CHANGE_MESSAGE_VALUE, text: e.currentTarget.value})
-        dispatch(changeMessageValueActionCreator(e.currentTarget.value))
+export const DialogsContainer = ({state, dispatch}: DialogsProps) => {
+    const onNewMessageChange = (text: string) => {
+        dispatch(changeMessageValueActionCreator(text))
     }
-
     const onSendMsgClick = () => {
-        // dispatch({type: ADD_MESSAGE})
         dispatch(addMessageActionCreator(state.newMsg))
     }
 
-    return (
-        <StyledDialogs>
-            <DialogsList>
-                {dialogsElements}
-            </DialogsList>
-            <FlexWrapperDialogs>
-                <Messages>
-                    {messagesElements}
-                </Messages>
-                <textarea
-                    onChange={onNewMessageChange}
-                    placeholder={'Enter your message'}></textarea>
-                <button onClick={onSendMsgClick}>Send</button>
-            </FlexWrapperDialogs>
-        </StyledDialogs>
-    );
+    return <Dialogs newMsgValue={state.newMsg}
+                    dialogs={state.dialogs}
+                    messages={state.messages}
+                    updateNewMessageBody={onNewMessageChange}
+                    addMessage={onSendMsgClick}/>
 };
 
 const StyledDialogs = styled.div`
