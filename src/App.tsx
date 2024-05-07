@@ -12,6 +12,7 @@ import {Settings} from "./layouts/settings/Settings";
 import {PostPropsType} from "./layouts/profile/myPosts/post/Post";
 import {DialogItemProps} from "./layouts/dialogs/dialog/Dialog";
 import {MessageProps} from "./layouts/dialogs/message/Message";
+import {ProfileContainer} from "./layouts/profile/ProfileContainer";
 
 
 // export type ProfilesPageStateProps = {
@@ -45,26 +46,21 @@ function App(props:AppProps) {
                 <Header/>
                 <Sidebar/>
                 <WrapperContent>
-                    {/*<Route exact path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />}/>*/}
                     <Route exact path='/dialogs' render={() => <Dialogs
                         dispatch={props.dispatch}
                         state={props.state.dialogsPage}
-                        // addMsg={props.addMsg}
-                        // onChangeMsgValue={props.onChangePostValue}
+
                     />}/>
 
-                    <Route path='/profile' render={() => <Profile
+                    <Route path='/profile' render={() => <ProfileContainer
                         dispatch={props.dispatch}
-                        state={props.state.profilePage}
-                        // addPost={props.addPost}
-                        // onChangePostValue={props.onChangePostValue}
+                        newValueForPost={props.state.profilePage.newValueForPost}
+                        posts={props.state.profilePage}
                     />}/>
 
                     <Route path='/news' component={News}/>
                     <Route path='/events' component={Events}/>
                     <Route path='/settings' component={Settings}/>
-                    {/*<Dialogs/>*/}
-                    {/*<Profile />*/}
                 </WrapperContent>
 
             </div>

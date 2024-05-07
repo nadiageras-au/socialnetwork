@@ -14,32 +14,36 @@ import yoda from "./../assets/images/avatars/yoda_icon.png";
 import {DialogItemProps} from "../layouts/dialogs/dialog/Dialog";
 import {MessageProps} from "../layouts/dialogs/message/Message";
 import {PostPropsType} from "../layouts/profile/myPosts/post/Post";
-import {rerenderEntireTree} from "../index";
-import {ADD_MESSAGE, ADD_POST, ON_CHANGE_MESSAGE_VALUE, ON_CHANGE_POST_VALUE} from "../helpers/actionsTypes";
+// import {rerenderEntireTree} from "../index";
+import {
+    ActionsType,
+    ADD_MESSAGE, ADD_POST,
+    ON_CHANGE_MESSAGE_VALUE, ON_CHANGE_POST_VALUE,
+} from "../helpers/actionsTypes";
+import {profilePageReducer} from "./profilePage-reducer";
+import {dialogsPageReducer} from "./dialogsPage-reducer";
 
-
-export type MainStateType = {
-    profilePage: {
+export type T_ProfilePage = {
         newValueForPost: string
         posts: Array<PostPropsType>
-    }
-    dialogsPage: {
-        dialogs: Array<DialogItemProps>
-        newMsg: string
-        messages: Array<MessageProps>
-    }
+}
+export type T_DialogsPage = {
+    dialogs: Array<DialogItemProps>
+    newMsg: string
+    messages: Array<MessageProps>
+}
+
+export type MainStateType = {
+    profilePage: T_ProfilePage
+    dialogsPage:  T_DialogsPage
 }
 
 export type StoreType = {
     _state: MainStateType
     getState: () => MainStateType
-    // onChangePostValue: (newText: string) => void
-    // addPost: (postMsg: string) => void
-    onChangeMsgValue: (newText: string) => void
-     addMsg: (postMsg: string) => void
     subscribe: (observer: (state: MainStateType) => void) => void
     _callSubscriber: (state: MainStateType) => void
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsType) => void
 }
 
 
@@ -149,57 +153,18 @@ export let store: StoreType = {
     getState() {
         return this._state
     },
-    onChangeMsgValue(newText: string) {
-        //debugger;
-        console.log(this._state.dialogsPage.newMsg)
-        this._state.dialogsPage.newMsg = newText;
-        this._callSubscriber(this._state)
-    },
-    addMsg(postMsg: string) {
-        let newMsg = {
-            id: 101, message: postMsg
-        }
-        this._state.dialogsPage.messages.unshift(newMsg);
-        this._state.dialogsPage.newMsg = ''
-        this._callSubscriber(this._state)
-    },
     subscribe(observer: (state: MainStateType) => void) {
         this._callSubscriber = observer
     },
-    dispatch(action: any) {
-        if (action.type === ADD_POST) {
-            console.log('add post worked')
-            let newPost = {
-                id: 7,
-                text: action.text,
-                media: '',
-                postDateInfo: "1 hour ago",
-                like: "0",
-                comment: "0",
-                share: "0"
-            }
-            this._state.profilePage.posts.unshift(newPost);
-            this._state.profilePage.newValueForPost = ''
-
-        } else  if (action.type === ON_CHANGE_POST_VALUE) {
-            console.log(this._state.profilePage.newValueForPost)
-            this._state.profilePage.newValueForPost = action.newText;
-
-        } else  if (action.type === ADD_MESSAGE) {
-            let newMsg = {
-                id: 101, message: this._state.dialogsPage.newMsg
-            }
-            this._state.dialogsPage.messages.unshift(newMsg);
-            this._state.dialogsPage.newMsg = ''
-
-        } else  if (action.type === ON_CHANGE_MESSAGE_VALUE) {
-            console.log(this._state.dialogsPage.newMsg)
-            this._state.dialogsPage.newMsg = action.text;
-        }
-
+    dispatch(action: ActionsType) {
+        profilePageReducer(this._state.profilePage, action)
+        dialogsPageReducer(this._state.dialogsPage, action)
         this._callSubscriber(this._state)
     }
 }
+
+
+
 
 //window.store = store
 

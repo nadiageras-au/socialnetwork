@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {GlobalStyle} from "./styles/GlobalStyles";
-import {MainStateType, store, StoreType} from "./redux/state"
+import {store} from "./redux/redux-store";
+import {MainStateType, StoreType} from "./redux/store"
+import {Provider} from "react-redux";
 //import {addPost} from "./redux/State";
 
 // type PropsType = {
@@ -14,20 +16,21 @@ import {MainStateType, store, StoreType} from "./redux/state"
 //     }
 //
 // }
-  export let rerenderEntireTree = (state: MainStateType) => {
+  export let rerenderEntireTree = (state:any) => {
     ReactDOM.render(
-        <>
-            <GlobalStyle/>
-            <App state={state}
-                 dispatch={store.dispatch.bind(store)}
-                 // addPost={store.addPost.bind(store)}
-                 addMsg={store.addMsg.bind(store)}
-                 // onChangePostValue={store.onChangePostValue.bind(store)}
-                 onChangeMsgValue={store.onChangeMsgValue.bind(store)}/>
-        </>,
+
+            <Provider store={store}>
+                <GlobalStyle/>
+                {/*<App dispatch={store.dispatch.bind(store)}/>*/}
+                <App state={state} dispatch={store.dispatch.bind(store)}/>
+            </Provider>,
+
+
         document.getElementById('root')
     );
  }
 
 rerenderEntireTree(store.getState());
-store.subscribe(rerenderEntireTree)
+store.subscribe(()=> {
+    rerenderEntireTree(store.getState())
+})

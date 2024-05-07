@@ -2,74 +2,59 @@ import React, {ChangeEvent, useRef} from 'react';
 import styled from "styled-components";
 import {AvatarImg, DialogItem, DialogItemProps} from "./dialog/Dialog";
 import {Message, MessageProps} from "./message/Message";
-// import {DialogsPageStateProps} from "../../App";
-//заглушка
 import darth from "./../../assets/images/avatars/darth_vader_icon.png";
-import {FlexWrapper} from "../../components/wrappers/FlexWrapper";
 import {ADD_MESSAGE, ON_CHANGE_MESSAGE_VALUE, ON_CHANGE_POST_VALUE} from "../../helpers/actionsTypes";
+import {addMessageActionCreator, changeMessageValueActionCreator} from "../../redux/dialogsPage-reducer";
 
-
-// export type DialogsPageStateProps = {
-//     dialogs:Array<DialogItemProps>
-//     messages: Array<MessageProps>
-// }
 export type DialogsStateProps = {
     dialogs: Array<DialogItemProps>
     messages: Array<MessageProps>
+    newMsg: string
 
 }
 export type DialogsProps = {
-    state:DialogsStateProps
-    // addMsg: ()=>void
-    // onChangeMsgValue: ()=>void
-    dispatch: (action:any) => void
+    state: DialogsStateProps
+    dispatch: (action: any) => void
 }
-export const Dialogs = ({state, dispatch}:DialogsProps) => {
+export const Dialogs = ({state, dispatch}: DialogsProps) => {
 
-    //let newPostElement = useRef<HTMLTextAreaElement>(null);
-    const onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch({type:ON_CHANGE_MESSAGE_VALUE, text: e.currentTarget.value})
-        // if (newPostElement.current !== null) {
-        //     alert(newPostElement.current.value)
-        //     // alert(newPostElement.current.resizableTextArea.textArea.value)
-        // }
+    let dialogsElements = state.dialogs.length
+        ? state.dialogs.map(el => {
+        return <DialogItem name={el.name} id={el.id} key={el.id} avatar={el.avatar}/>
+    })
+        : <div>No Dialogs Yet</div>
+    let messagesElements = state.messages.length
+    ? state.messages.map(msg => {
+        return <>
+            <AvatarImg src={darth} height='50px' width='50px'/>
+            <Message message={msg.message} key={msg.id} id={msg.id}/>
+        </>
+    })
+        : <div>No Messages yet</div>
+
+
+    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        // dispatch({type: ON_CHANGE_MESSAGE_VALUE, text: e.currentTarget.value})
+        dispatch(changeMessageValueActionCreator(e.currentTarget.value))
     }
 
     const onSendMsgClick = () => {
-      dispatch({type:ADD_MESSAGE})
+        // dispatch({type: ADD_MESSAGE})
+        dispatch(addMessageActionCreator(state.newMsg))
     }
 
     return (
         <StyledDialogs>
             <DialogsList>
-                {
-                    state.dialogs.map(el=> {
-                        return <DialogItem name={el.name} id={el.id} key={el.id} avatar={el.avatar}/>
-                    })
-                }
+                {dialogsElements}
             </DialogsList>
             <FlexWrapperDialogs>
                 <Messages>
-                    {
-                        state.messages.map(msg => {
-
-                            return <>
-                                {/*<AvatarImg src={state.dialogs.filter((el) => {*/}
-                                {/*    el.id === msg.id ? el.avatar : darth*/}
-                                {/*})} height='50px' width='50px'/>*/}
-
-                                <AvatarImg src={darth} height='50px' width='50px'/>
-                                <Message message={msg.message} key={msg.id} id={msg.id}/>
-                            </>
-                        })
-                    }
-
+                    {messagesElements}
                 </Messages>
-                {/*<textarea ref={newPostElement}></textarea>*/}
                 <textarea
-                    // value={newMessageBody}
-                onChange={onNewMessageChange}
-                placeholder={'Enter your message'}></textarea>
+                    onChange={onNewMessageChange}
+                    placeholder={'Enter your message'}></textarea>
                 <button onClick={onSendMsgClick}>Send</button>
             </FlexWrapperDialogs>
         </StyledDialogs>

@@ -3,50 +3,32 @@ import {Image} from '../../components/image/Image.styled'
 import {MyPosts} from "./myPosts/MyPosts";
 import styled from "styled-components";
 import {Button, Form, Input} from 'antd';
-import * as string_decoder from "string_decoder";
 import TextArea from 'antd/lib/input/TextArea';
 import {theme} from "../../styles/Theme.styled";
 import sendIcon from '../../assets/images/icons/send.svg'
 import photoIcon from '../../assets/images/icons/addPicture.svg'
 import videoIcon from '../../assets/images/icons/addVideo.svg.svg'
 import {PostPropsType} from "./myPosts/post/Post";
-import {ADD_POST, ON_CHANGE_POST_VALUE} from "../../helpers/actionsTypes";
+import {addPostActionCreator, changePostValueActionCreator} from "../../redux/profilePage-reducer";
 
-
-// type PostTextareaPropsType =
-// {
-//     name: string
-//     placeholder: string
-// }
-
-type TextAreaType = {
-    ref: any
-}
 export type ProfileStateProps = {
     newValueForPost: string
     posts: Array<PostPropsType>
 }
 export type ProfileProps = {
-    state: ProfileStateProps
-    // addPost: (text:string)=> void
-    // onChangePostValue:(newPost: string)=>void
-    dispatch: (action:any) => void
+    posts: Array<PostPropsType>
+    newValueForPost:string
+    // dispatch: (action:any) => void
+    addPost: ()=>void
+    updateNewPostText: (text:string)=>void
 }
-export const Profile = (props: ProfileProps) => {
+export const Profile = ({addPost, updateNewPostText,newValueForPost, posts}: ProfileProps) => {
 
-    //let newPostElement = useRef<HTMLTextAreaElement>(null);
-
-
-    const addPostHandler = () => {
-        //debugger;
-       // if (newPostElement.current !== null) {
-            //props.addPost(newPostElement.current.value)
-            props.dispatch({type:ADD_POST,text: props.state.newValueForPost})
-        //}
+    const onAddPostHandler = () => {
+            addPost()
     }
-
     const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type:ON_CHANGE_POST_VALUE,newText:e.currentTarget.value})
+        updateNewPostText(e.currentTarget.value)
     }
     // name="post-text"
     return (
@@ -55,8 +37,8 @@ export const Profile = (props: ProfileProps) => {
                 <StyledForm action="/" method="post">
                     {/*<StyledTextArea ref={newPostElement}/>*/}
                    {/*<textarea ref={newPostElement} value={props.state.newValueForPost}/>*/}
-                   <textarea value={props.state.newValueForPost} onChange={onChangeHandler}/>
-                    <button onClick={addPostHandler}>Add</button>
+                   <textarea value={newValueForPost} onChange={onChangeHandler}/>
+                    <button onClick={onAddPostHandler}>Add</button>
                     <AddPostBtns>
                         <label htmlFor="addPostFile">
                             <InputBtn type="button"/>
@@ -69,8 +51,7 @@ export const Profile = (props: ProfileProps) => {
                     </AddPostBtns>
                 </StyledForm>
             </AddPost>
-
-            <MyPosts posts={props.state.posts}/>
+            <MyPosts posts={posts}/>
         </div>
     );
 };
