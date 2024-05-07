@@ -47,16 +47,9 @@ function App(props:AppProps) {
                 <Header/>
                 <Sidebar/>
                 <WrapperContent>
-                    <Route exact path='/dialogs' render={() => <DialogsContainer
-                        dispatch={props.dispatch}
-                        state={props.state.dialogsPage}
-                    />}/>
+                    <Route exact path='/dialogs' render={() => <DialogsContainer/>}/>
 
-                    <Route path='/profile' render={() => <ProfileContainer
-                        dispatch={props.dispatch}
-                        newValueForPost={props.state.profilePage.newValueForPost}
-                        posts={props.state.profilePage}
-                    />}/>
+                    <Route path='/profile' render={() => <ProfileContainer/>}/>
 
                     <Route path='/news' component={News}/>
                     <Route path='/events' component={Events}/>

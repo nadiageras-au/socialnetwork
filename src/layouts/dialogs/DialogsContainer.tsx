@@ -6,30 +6,41 @@ import darth from "./../../assets/images/avatars/darth_vader_icon.png";
 import {ADD_MESSAGE, ON_CHANGE_MESSAGE_VALUE, ON_CHANGE_POST_VALUE} from "../../helpers/actionsTypes";
 import {addMessageActionCreator, changeMessageValueActionCreator} from "../../redux/dialogsPage-reducer";
 import {Dialogs} from "./Dialogs";
+import {StoreContext} from "../../StoreContext";
+// import {useDispatch} from "react-redux";
 
-export type DialogsStateProps = {
-    dialogs: Array<DialogItemProps>
-    messages: Array<MessageProps>
-    newMsg: string
+// export type DialogsStateProps = {
+//     dialogs: Array<DialogItemProps>
+//     messages: Array<MessageProps>
+//     newMsg: string
+//
+// }
+// export type DialogsProps = {
+//     // state: DialogsStateProps
+//     // dispatch: (action: any) => void
+// }
+export const DialogsContainer = () => {
 
-}
-export type DialogsProps = {
-    state: DialogsStateProps
-    dispatch: (action: any) => void
-}
-export const DialogsContainer = ({state, dispatch}: DialogsProps) => {
-    const onNewMessageChange = (text: string) => {
-        dispatch(changeMessageValueActionCreator(text))
+    return <StoreContext.Consumer>
+        {
+        (store) => {
+            // const dispatch = useDispatch()
+            const onNewMessageChange = (text: string) => {
+                store.dispatch(changeMessageValueActionCreator(text))
+            }
+            const onSendMsgClick = () => {
+                store.dispatch(addMessageActionCreator(store.getState().dialogsPage.newMsg))
+            }
+
+           return <Dialogs newMsgValue={store.getState().dialogsPage.newMsg}
+                     dialogs={store.getState().dialogsPage.dialogs}
+                     messages={store.getState().dialogsPage.messages}
+                     updateNewMessageBody={onNewMessageChange}
+                     addMessage={onSendMsgClick}/>
+        }
+
     }
-    const onSendMsgClick = () => {
-        dispatch(addMessageActionCreator(state.newMsg))
-    }
-
-    return <Dialogs newMsgValue={state.newMsg}
-                    dialogs={state.dialogs}
-                    messages={state.messages}
-                    updateNewMessageBody={onNewMessageChange}
-                    addMessage={onSendMsgClick}/>
+    </StoreContext.Consumer>
 };
 
 const StyledDialogs = styled.div`

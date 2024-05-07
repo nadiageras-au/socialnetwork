@@ -45,7 +45,7 @@ export const dialogsPageReducer = (state: T_DialogsPage = initialState, action: 
             return state;
     }
 }
-export const addMessageActionCreator = (message:string) => ({type: ADD_MESSAGE, message })
-export const changeMessageValueActionCreator = (text:string) => ({type: ON_CHANGE_MESSAGE_VALUE, msgValue: text })
+export const addMessageActionCreator = (message:string) => ({type: ADD_MESSAGE, message } as const)
+export const changeMessageValueActionCreator = (text:string) => ({type: ON_CHANGE_MESSAGE_VALUE, msgValue: text } as const )
 
 
