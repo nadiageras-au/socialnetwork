@@ -18,7 +18,6 @@ export type MyPostsType = {
 }
 export const MyPosts = (props:MyPostsType) => {
 
-
     return (
         <StyledPosts>
             {

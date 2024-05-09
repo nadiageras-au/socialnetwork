@@ -28,24 +28,28 @@ let initialState = {
 }
 
 export const dialogsPageReducer = (state: T_DialogsPage = initialState, action: ActionsType): T_DialogsPage => {
+    // debugger
+
     switch (action.type) {
         case ADD_MESSAGE : {
-            let newMsg = {
-                id: 101, message: action.message
-            }
-           state.messages.unshift(newMsg);
-            state.newMsg = ''
-            return state;
+            return  {
+                ...state,
+                newMsg: '',
+                messages: [...state.messages,
+                    {id: 101, message: action.message}]
+            };
         }
         case ON_CHANGE_MESSAGE_VALUE : {
-            state.newMsg = action.msgValue;
-            return state;
+            return {...state, newMsg: action.msgValue};
         }
         default:
             return state;
     }
 }
-export const addMessageActionCreator = (message:string) => ({type: ADD_MESSAGE, message } as const)
-export const changeMessageValueActionCreator = (text:string) => ({type: ON_CHANGE_MESSAGE_VALUE, msgValue: text } as const )
+export const addMessageActionCreator = (message: string) => ({type: ADD_MESSAGE, message} as const)
+export const changeMessageValueActionCreator = (text: string) => ({
+    type: ON_CHANGE_MESSAGE_VALUE,
+    msgValue: text
+} as const)
 
 

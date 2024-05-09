@@ -17,9 +17,10 @@ export type DialogsProps = {
     dialogs: Array<DialogItemProps>
     messages: Array<MessageProps>
     updateNewMessageBody: (text: string) => void
-    addMessage: () => void
+    addMessage: (text:string) => void
     // dispatch: (action: any) => void
 }
+// export const Dialogs = ({newMsgValue, dialogs, messages, updateNewMessageBody,addMessage}: DialogsProps) => {
 export const Dialogs = ({newMsgValue, dialogs, messages, updateNewMessageBody,addMessage}: DialogsProps) => {
 
     let dialogsElements = dialogs.length
@@ -42,7 +43,7 @@ export const Dialogs = ({newMsgValue, dialogs, messages, updateNewMessageBody,ad
     }
 
     const onSendMsgClick = () => {
-        addMessage()
+        addMessage(newMsgValue)
     }
 
     return (

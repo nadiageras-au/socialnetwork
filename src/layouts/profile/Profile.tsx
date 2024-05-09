@@ -22,7 +22,6 @@ export type ProfileProps = {
     updateNewPostText: (text:string)=>void
 }
 export const Profile = ({addPost, updateNewPostText,newValueForPost, posts}: ProfileProps) => {
-
     const onAddPostHandler = () => {
             addPost()
     }

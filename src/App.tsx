@@ -14,6 +14,8 @@ import {DialogItemProps} from "./layouts/dialogs/dialog/Dialog";
 import {MessageProps} from "./layouts/dialogs/message/Message";
 import {ProfileContainer} from "./layouts/profile/ProfileContainer";
 import {DialogsContainer} from "./layouts/dialogs/DialogsContainer";
+import {Users} from "./layouts/users/Users";
+import {UsersContainer} from "./layouts/users/UsersContainer";
 
 
 // export type ProfilesPageStateProps = {
@@ -48,8 +50,8 @@ function App(props:AppProps) {
                 <Sidebar/>
                 <WrapperContent>
                     <Route exact path='/dialogs' render={() => <DialogsContainer/>}/>
-
                     <Route path='/profile' render={() => <ProfileContainer/>}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
 
                     <Route path='/news' component={News}/>
                     <Route path='/events' component={Events}/>

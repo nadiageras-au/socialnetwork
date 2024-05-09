@@ -56,14 +56,15 @@ export const profilePageReducer = (state: T_ProfilePage = initialState, action: 
                 comment: "0",
                 share: "0"
             }
-            state.posts.unshift(newPost);
-            state.newValueForPost = ''
-            return state
+         return {...state,
+                    newValueForPost : '',
+                    posts : [ newPost, ...state.posts]
+                }
+
         }
         case ON_CHANGE_POST_VALUE : {
-            console.log(state.newValueForPost)
-            state.newValueForPost = action.newText;
-            return state
+            return  {...state,
+                    newValueForPost: action.newText}
         }
         default:
             return state;
