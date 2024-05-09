@@ -14,7 +14,6 @@ import {DialogItemProps} from "./layouts/dialogs/dialog/Dialog";
 import {MessageProps} from "./layouts/dialogs/message/Message";
 import {ProfileContainer} from "./layouts/profile/ProfileContainer";
 import {DialogsContainer} from "./layouts/dialogs/DialogsContainer";
-import {Users} from "./layouts/users/Users";
 import {UsersContainer} from "./layouts/users/UsersContainer";
 
 

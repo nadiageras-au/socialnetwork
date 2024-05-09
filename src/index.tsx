@@ -6,9 +6,9 @@ import {GlobalStyle} from "./styles/GlobalStyles";
 // import {store} from "./redux/redux-store";
 import {Provider} from "react-redux";
 import {StoreContext} from "./StoreContext";
-import {store} from "./redux/redux-store";
+import {AppStateType, store} from "./redux/redux-store";
 
-  export let rerenderEntireTree = (state:any) => {
+  export let rerenderEntireTree = (state:AppStateType) => {
     ReactDOM.render(
              <Provider store={store}>
                 <GlobalStyle/>
