@@ -5,23 +5,23 @@ import {UsersPropsType} from "./UsersContainer";
 const IMG_URL = 'https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1715219430~exp=1715223030~hmac=0dcafb1ada6b1ecf3fc83416a4b2fbc66b28a80ce4737a266d06c1bdf9e9d117&w=996'
 
 class Users extends React.Component<any> {
+    constructor(props:any) {//UsersPropsType
+        super(props);
+    }
 
-    getUsers = () => {
-
-        if (this.props.users.length === 0) {
+    componentDidMount() {
+        // if (this.props.users.length === 0) {
             axios.get<any>('https://social-network.samuraijs.com/api/1.0/users').then(response => {
                 console.log(response.data.items)
                 this.props.setUsers(response.data.items)
             })
         }
-    }
+
 
     render() {
-        // debugger;
-        return (
 
+        return (
             <div>
-            <button onClick={()=>this.getUsers()}>Get Users</button>
             {
                 this.props.users.length > 0 &&
                 this.props.users.map((u: any) => <div key={u.id}>
@@ -61,6 +61,6 @@ class Users extends React.Component<any> {
                 )}
         </div>
         )}
-};
+}
 
 export default Users

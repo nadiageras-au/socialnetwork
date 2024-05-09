@@ -10,10 +10,11 @@ export const Navbar = () => {
         <WrapperSidebarNavbar>
             <nav className='nav'>
                 <NavbarItem iconId="user" width='24px' height='24px' title='Profile' component='profile'/>
-                <NavbarItem iconId="list_right" width='24px' height='24px' title='News' component='news'/>
                 <NavbarItem iconId="messages" width='23px' height='18px' title='Messages' component='dialogs'/>
+                <NavbarItem iconId="groups" width='24px' height='24px' title='Users' component='users'/>
+                <NavbarItem iconId="list_right" width='24px' height='24px' title='News' component='news'/>
                 <NavbarItem iconId="calendar" width='24px' height='24px' title='Events' component='events'/>
-                <NavbarItem iconId="groups" width='24px' height='24px' title='Groups' component='groups'/>
+                {/*<NavbarItem iconId="groups" width='24px' height='24px' title='Groups' component='groups'/>*/}
                 <NavbarItem iconId="settings" width='24px' height='24px' title='Settings' component='settings'/>
             </nav>
         </WrapperSidebarNavbar>
