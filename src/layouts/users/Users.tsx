@@ -1,59 +1,42 @@
 import React from 'react';
+import styled from "styled-components";
+import {User_T} from "../../redux/usersPage-reducer";
 import axios from "axios";
-import {UsersPropsType} from "./UsersContainer";
-import styled, {css} from "styled-components";
-import {WrapperSidebarBlock} from "../../components/wrappers/WrapperSidebarBlock";
 
 const IMG_URL = 'https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1715219430~exp=1715223030~hmac=0dcafb1ada6b1ecf3fc83416a4b2fbc66b28a80ce4737a266d06c1bdf9e9d117&w=996'
 
-class Users extends React.Component<any> {
-    constructor(props: any) {//UsersPropsType
-        super(props);
+type UsersProps = {
+    totalCount: number
+    users: User_T[]
+    pageSize: number
+    currentPage: number
+    unfollow:(userId:number)=>void
+    follow: (userId:number)=>void
+    onPageChanged:(pageNumber: number)=>void
+}
+
+export const Users = (props: UsersProps) => {
+    let pagesCount = Math.ceil(props.totalCount / props.pageSize)
+    let pages = []
+    for (let i = 1; i < pagesCount; i++) {
+        pages.push(i)
     }
 
-    componentDidMount() {
-        // if (this.props.users.length === 0) {
-        axios.get<any>
-        (`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
-                console.log(this.props.totalCount)
-            })
-    }
+    return (
 
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        axios.get<any>
-        (`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => {
-                console.log('onPgeChanged', response.data.items)
-                this.props.setUsers(response.data.items)
-            })
-    }
+        <div>
 
-    render() {
-        let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize)
-        let pages = []
-        for (let i = 1; i < pagesCount; i++) {
-            pages.push(i)
-        }
-
-        // @ts-ignore
-        return (
             <div>
+                {props.users.length > 0 && pages.map(p => (
+                    <PageSpan
+                        active={props.currentPage === p}
+                        onClick={() => props.onPageChanged(p)}>{p}</PageSpan>
 
-                <div>
-                    {this.props.users.length > 0 && pages.map(p => (
-                        <PageSpan
-                            active={this.props.currentPage === p}
-                            onClick={() => this.onPageChanged(p)}>{p}</PageSpan>
-
-                    ))}
-                </div>
-                {
-                    this.props.users.length > 0 &&
-                    this.props.users.map((u: any) => <div key={u.id}>
+                ))}
+            </div>
+            {
+                props.users.length > 0 &&
+                props.users.map((u: any) => <div key={u.id}>
             <span>
                 <div>
                     {/*<img src={u.photoUrl} style={{height: "auto",*/}
@@ -68,16 +51,16 @@ class Users extends React.Component<any> {
                 <span>
                     {u.followed
                         ? <button onClick={() => {
-                            this.props.unfollow(u.id)
+                            props.unfollow(u.id)
                         }}>Unfollow</button>
                         : <button onClick={() => {
-                            this.props.follow(u.id)
+                            props.follow(u.id)
                         }}>Follow</button>
                     }
 
                 </span>
             </span>
-                            <span>
+                        <span>
                 <span>
                     <div>{u.name}</div><div>{u.status}</div>
                 </span>
@@ -86,14 +69,11 @@ class Users extends React.Component<any> {
                     <div>{'u.location.galaxy'}</div>
                 </span>
             </span>
-                        </div>
-                    )}
-            </div>
-        )
-    }
-}
-
-export default Users
+                    </div>
+                )}
+        </div>
+    );
+};
 
 type PageSpanType = any & {
     active: boolean

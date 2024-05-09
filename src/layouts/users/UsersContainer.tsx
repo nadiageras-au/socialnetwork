@@ -8,9 +8,10 @@ import {
     unFollowAC,
     User_T
 } from "../../redux/usersPage-reducer";
-import Users from "./Users";
+import Users from "./UsersAPIComponent";
 import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
+import UsersAPIComponent from "./UsersAPIComponent";
 
 
 
@@ -65,4 +66,4 @@ const mapDispatchToProps = (dispatch: Dispatch) :mapDispatchToProps_T => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
