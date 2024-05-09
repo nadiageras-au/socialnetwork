@@ -2,6 +2,8 @@
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 
 export type User_T = {
     followed: boolean
@@ -13,16 +15,18 @@ export type User_T = {
     }
     status: string
     uniqueUrlName: string
-
-
-
-
 }
 const initialState: initialState_T = {
-    users: []
+    users: [],
+    pageSize: 99,
+    totalCount: 0,
+    currentPage: 1
 }
 export type initialState_T = {
     users: Array<User_T>
+    pageSize: number
+    totalCount: number
+    currentPage: number
 }
 
 
@@ -49,7 +53,17 @@ export const usersPageReducer = (state:initialState_T = initialState , action: U
         }
         case SET_USERS : {
             return {
-                ...state, users: [...state.users, ...action.users]
+                ...state, users: action.users
+            }
+        }
+        case SET_CURRENT_PAGE : {
+            return {
+                ...state, currentPage: action.currentPageNumber
+            }
+        }
+        case SET_TOTAL_COUNT : {
+            return {
+                ...state, totalCount: action.totalCount
             }
         }
         default: return state
@@ -57,8 +71,14 @@ export const usersPageReducer = (state:initialState_T = initialState , action: U
 
 }
 
-type UsersActions_T = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
+type UsersActions_T = ReturnType<typeof followAC>
+    | ReturnType<typeof unFollowAC>
+    | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUsersCountAC>
 
 export const followAC = (userId:number) => ({type: FOLLOW, userId} as const)
 export const unFollowAC = (userId:number) => ({type: UNFOLLOW, userId } as const)
 export const setUsersAC = (users:Array<User_T>) => ({type: SET_USERS,users } as const)
+export const setCurrentPageAC = (currentPageNumber:number) => ({type: SET_CURRENT_PAGE,currentPageNumber } as const)
+export const setTotalUsersCountAC = (totalCount:number) => ({type: SET_TOTAL_COUNT,totalCount} as const)

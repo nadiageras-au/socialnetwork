@@ -9,6 +9,11 @@ import r2d2 from "../assets/images/avatars/r2d2_droid_icon.png";
 import luke from "../assets/images/avatars/luke_skywalker.png";
 import leia from "../assets/images/avatars/leia_icon.png";
 import yoda from "../assets/images/avatars/yoda_icon.png";
+// export type DialogsType = {
+//     id: number
+//     name: string
+//     avatar: string
+// }
 
 let initialState = {
     dialogs: [
