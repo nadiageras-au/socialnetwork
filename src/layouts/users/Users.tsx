@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {User_T} from "../../redux/usersPage-reducer";
-import axios from "axios";
+import {NavLink} from "react-router-dom";
 
 const IMG_URL = 'https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1715219430~exp=1715223030~hmac=0dcafb1ada6b1ecf3fc83416a4b2fbc66b28a80ce4737a266d06c1bdf9e9d117&w=996'
 
@@ -13,6 +13,7 @@ type UsersProps = {
     unfollow:(userId:number)=>void
     follow: (userId:number)=>void
     onPageChanged:(pageNumber: number)=>void
+    isFetching: boolean
 }
 
 export const Users = (props: UsersProps) => {
@@ -23,15 +24,12 @@ export const Users = (props: UsersProps) => {
     }
 
     return (
-
         <div>
-
             <div>
                 {props.users.length > 0 && pages.map(p => (
                     <PageSpan
                         active={props.currentPage === p}
                         onClick={() => props.onPageChanged(p)}>{p}</PageSpan>
-
                 ))}
             </div>
             {
@@ -42,11 +40,13 @@ export const Users = (props: UsersProps) => {
                     {/*<img src={u.photoUrl} style={{height: "auto",*/}
                     {/*    width: "100%",*/}
                     {/*    maxWidth: "72px"}}/> */}
-                    <img src={u.photos.small != null ? u.photos.small : IMG_URL} style={{
-                        height: "auto",
-                        width: "100%",
-                        maxWidth: "72px"
-                    }}/>
+                    <NavLink to={'/profile/' + u.id}>
+                        <img src={u.photos.small != null ? u.photos.small : IMG_URL} style={{
+                            height: "auto",
+                            width: "100%",
+                            maxWidth: "72px"
+                        }}/>
+                    </NavLink>
                 </div>
                 <span>
                     {u.followed

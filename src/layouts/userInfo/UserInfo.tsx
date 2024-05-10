@@ -1,25 +1,36 @@
 import React from 'react';
 import styled from "styled-components";
-import {Image} from "../image/Image.styled";
+import {Image} from "../../components/image/Image.styled";
 //images
 import avatarSrc from "../../assets/images/avatars/jediObiWan.png"
 import avatarBg from '../../assets/images/photos/bg_avatar.jpg'
 import iconMap from '../../assets/images/icons/map.svg'
 //global styles and variables
 import {theme} from "../../styles/Theme.styled";
-import {Button} from "../button/Button.styled";
-import {WrapperSidebarBlock} from "../wrappers/WrapperSidebarBlock";
-import {Icon} from "../icon/IconSVG";
+import {Button} from "../../components/button/Button.styled";
+import {WrapperSidebarBlock} from "../../components/wrappers/WrapperSidebarBlock";
+import {Icon} from "../../components/icon/IconSVG";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
 
 
-export const UserInfo = () => {
+type UserInfoProps = {
+    name?: string
+    //profile? : ProfileType
+}
+export const UserInfo = (props:UserInfoProps) => {
+
+    //const profile = useSelector<AppStateType, any>(state => state.profilePage.profile)
+
+
     return (
         <WrapperSidebarBlock>
 
             <AvatarBG>
                 <AvatarImg src={avatarSrc} width="45%" height="auto"/>
             </AvatarBG>
-            <UserName>Obi-Wan Kenobi</UserName>
+            {/*<UserName>Obi-Wan Kenobi</UserName>*/}
+            <UserName>{props.name?props.name:'Obi-Wan Kenobi' }</UserName>
             <UserPlace>
                 {/*<Image src={iconMap} width="auto" height={"16px"}/>*/}
                 <Icon iconId='map' width='15px' height='15px'/>

@@ -5,43 +5,48 @@ import {Profile} from "./Profile";
 import {StoreContext} from "../../StoreContext";
 import {connect, useDispatch} from "react-redux";
 import {MainStateType, T_ProfilePage} from "../../redux/store";
+import axios from "axios";
+import {User_T} from "../../redux/usersPage-reducer";
 
-// export type ProfileStateProps = {
-//     newValueForPost: string
-//     posts: Array<PostPropsType>
-// }
-// export type ProfileProps = {
-//     // newValueForPost: string
-//     // posts: Array<PostPropsType>
-//     // dispatch: (action: any) => void
-// }
-// export const ProfileContainer = (props: ProfileProps) => {
-//     const dispatch = useDispatch()
-//
-//     const addPost = () => {
-//         // props.dispatch(addPostActionCreator{type:ADD_POST,text: props.state.newValueForPost})
-//         dispatch(addPostActionCreator())
-//     }
-//
-//     const onChangePostValueHandler = (text: string) => {
-//         dispatch(changePostValueActionCreator(text))
-//     }
-//
-//     return (
-//         <StoreContext.Consumer>
-//             {
-//             (store)=> (
-//                 <Profile updateNewPostText={onChangePostValueHandler}
-//                          addPost={addPost}
-//                          newValueForPost={store.getState().profilePage.newValueForPost}
-//                          posts={store.getState().profilePage.posts}/>
-//                 )
-//
-//         }
-//         </StoreContext.Consumer>
-//
-//     );
-// };
+type Response<T = {}> = {
+    aboutMe: string
+    contacts: {
+        facebook: null| string
+        website: null| string
+        vk: null| string
+        twitter: null| string
+        instagram: null| string
+        youtube: null| string
+        github: null| string
+        mainLink:null| string
+    },
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: {
+        small: string
+        large: string
+    }
+    // items: T[]
+    // error: null | any
+    // totalCount: number
+}
+class ProfileAPIComponent extends React.Component<any> {
+
+    componentDidMount() {
+        axios.get<Response>
+        (`https://social-network.samuraijs.com/api/1.0/profile/2`)
+            .then(response => {
+                this.props.toggleIsFetching(false)
+                this.props.setUserProfile(response.data)
+            })
+    }
+
+    render() {
+        return <div></div>
+    }
+}
 
 let mapStateToProps = (state:MainStateType) => {
 
@@ -65,7 +70,7 @@ let mapDispatchToProps = (dispatch: any) => {
 }
 
 
-export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile)
+export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileAPIComponent)
 
 
 
