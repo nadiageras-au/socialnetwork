@@ -55,7 +55,7 @@ function App(props:AppProps) {
                 <Sidebar/>
                 <WrapperContent>
                     <Route exact path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/profile' render={() => <Profile store={props.store}/>}/>
+                    <Route path='/profile' render={() => <Profile/>}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/events' component={Events}/>

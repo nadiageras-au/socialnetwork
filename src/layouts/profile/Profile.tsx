@@ -18,25 +18,17 @@ import {AppStateType} from "../../redux/redux-store";
 // }
 
 export type ProfileProps = {
-    store: any
 
 }
 // export const Profile = ({addPost, updateNewPostText,newValueForPost, posts}: ProfileProps) => {
-export const Profile = ({store}: ProfileProps) => {
+export const Profile = (props: ProfileProps) => {
 
-    // name="post-text"
     return (
         <div>
             <ProfileTabPanel/> {/* ProfileInfo*/}
-            <ProfileContentContainer store={store}/> {/* Content - Posts, Photos & etc*/}
+            <ProfileContentContainer/> {/* Content - Posts, Photos & etc*/}
 
         </div>
     );
 };
 
-// const ProfileAvatar = styled(Image)`
-// border-radius: 50px;
-// max-width: 100px;
-// height: 100%;
-//
-// `

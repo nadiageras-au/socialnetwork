@@ -1,15 +1,15 @@
 import React, {ChangeEvent} from 'react';
-import {MyPosts} from "../myPosts/MyPosts";
+import {MyPosts} from "./myPosts/MyPosts";
 import styled from 'styled-components';
 // import {Image} from '../../components/image/Image.styled'
 import {Button, Form, Input} from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 // import {theme} from "../../styles/Theme.styled";
-import {theme} from "../../../styles/Theme.styled";
-import sendIcon from '../../../assets/images/icons/send.svg'
-import photoIcon from '../../../assets/images/icons/addPicture.svg'
+import {theme} from "../../styles/Theme.styled";
+import sendIcon from '../../assets/images/icons/send.svg'
+import photoIcon from '../../assets/images/icons/addPicture.svg'
 import videoIcon from '../../assets/images/icons/addVideo.svg.svg'
-import {PostPropsType} from "../myPosts/post/Post";
+import {PostPropsType} from "./myPosts/post/Post";
 
 export type ProfileProps = {
     posts: Array<PostPropsType>

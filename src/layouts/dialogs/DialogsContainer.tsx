@@ -22,7 +22,7 @@ import {MainStateType, T_DialogsPage} from "../../redux/store";
 //     // dispatch: (action: any) => void
 // }
 
-// export const DialogsContainer = () => {
+// export const DialogsContainer = () => {// old method to get store via 'context' usage
 //
 //     return <StoreContext.Consumer>
 //         {
@@ -70,44 +70,4 @@ let mapDispatchToProps = (dispatch: any) => {
 // const SuperDialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
 export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
-const StyledDialogs = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`
-
-const DialogsList = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 15px;
-  width: 25%;
-  max-width: 250px;
-  background-color: #f9fdb3;
-`
-
-const Dialog = styled.div`
-  font-size: 20px;
-  color: cornflowerblue;
-  border: 1px solid forestgreen;
-  background-color: #fffdf1;
-`
-
-const Messages = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 30px;
-  background-color: #f9e0ff;
-  width: 70%;
-`
-export const FlexWrapperDialogs = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  align-items: center;
-  padding: 20px;
-  width: 100%;
-`
 
