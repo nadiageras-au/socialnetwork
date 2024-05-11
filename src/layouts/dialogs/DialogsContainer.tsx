@@ -1,15 +1,13 @@
-import React, {ChangeEvent, useRef} from 'react';
-import styled from "styled-components";
-// import {AvatarImg, DialogItem, DialogItemProps} from "./dialog/Dialog";
-// import {Message, MessageProps} from "./message/Message";
-// import darth from "./../../assets/images/avatars/darth_vader_icon.png";
-// import {ADD_MESSAGE, ON_CHANGE_MESSAGE_VALUE, ON_CHANGE_POST_VALUE} from "../../helpers/actionsTypes";
-import {addMessageActionCreator, changeMessageValueActionCreator} from "../../redux/dialogsPage-reducer";
+
+import {
+    addMessageActionCreator,
+    changeMessageValueActionCreator,
+    DialogsStateType
+} from "../../redux/dialogsPage-reducer";
 import {Dialogs} from "./Dialogs";
-// import {StoreContext} from "../../StoreContext";
 import {connect} from "react-redux";
-import {MainStateType, T_DialogsPage} from "../../redux/store";
-// import {useDispatch} from "react-redux";
+import {Dispatch} from "redux";
+import {AppStateType} from "../../redux/redux-store";
 
 // export type DialogsStateProps = {
 //     dialogs: Array<DialogItemProps>
@@ -47,15 +45,15 @@ import {MainStateType, T_DialogsPage} from "../../redux/store";
 //     </StoreContext.Consumer>
 // };
 
-let mapStateToProps = (state: MainStateType) => {
+let mapStateToProps = (state: AppStateType) => {
 
     return {
-        newMsgValue: state.dialogsPage.newMsg,
+        newMsgValue: state.dialogsPage.newMsg ,
         messages: state.dialogsPage.messages,
         dialogs: state.dialogsPage.dialogs
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: Dispatch) => {
 
     return {
         updateNewMessageBody: (text: string) => {

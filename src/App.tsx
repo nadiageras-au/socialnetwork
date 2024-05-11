@@ -18,6 +18,7 @@ import {DialogsContainer} from "./layouts/dialogs/DialogsContainer";
 import {UsersContainer} from "./layouts/users/UsersContainer";
 import {UserInfo} from "./layouts/userInfo/UserInfo";
 import {store} from "./redux/redux-store";
+import {ProfileContainer} from "./layouts/profile/ProfileContainer";
 
 
 // export type ProfilesPageStateProps = {
@@ -55,7 +56,7 @@ function App(props:AppProps) {
                 <Sidebar/>
                 <WrapperContent>
                     <Route exact path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/profile' render={() => <Profile/>}/>
+                    <Route path='/profile' render={() => <ProfileContainer/>}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/events' component={Events}/>

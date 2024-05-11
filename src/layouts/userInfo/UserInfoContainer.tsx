@@ -40,7 +40,7 @@ import {UserInfo} from "./UserInfo";
 //     );
 // };
 
-let mapStateToProps = (state:MainStateType) => {
+let mapStateToProps = (state:any) => {
 
     return {
        // profile: state.profilePage.profile,

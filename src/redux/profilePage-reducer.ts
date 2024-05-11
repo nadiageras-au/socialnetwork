@@ -1,12 +1,14 @@
 import {
     ActionsType,
     ADD_POST,
-    ON_CHANGE_POST_VALUE
+    ON_CHANGE_POST_VALUE, SET_USER_PROFILE
 } from "../helpers/actionsTypes";
 import {T_ProfilePage} from "./store";
 import imgPost1 from "../assets/images/photos/post01.jpg";
 import imgPost2 from "../assets/images/photos/post02.jpg";
 import imgPost3_0 from "../assets/images/photos/post030.jpg";
+import {PostPropsType} from "../layouts/profile/myPosts/post/Post";
+import {ProfileResponseType} from "../layouts/profile/ProfileContainer";
 
 const text1 = "Lock on to him, R2. Master, General Grievous's ship is directly ahead Master, General Grievous's ship is directly ahead the one crawling with vulture droids. I see it. Oh, this is going to be easy. Oddball, do you copy? Copy, Red Leader. It's only because I'm so in love. No, it's because I'm so in love with you. So love has blinded you? That's not exactly what I meant. But it's probably true."
 const text2 = "Did you hear that? They've shut down the main reactor. We'll be destroyed for sure. This is madness! We're doomed! There'll be no escape for the Princess this time. What's that? Artoo! Artoo-Detoo, where are you? At last! Where have you been? They're heading in this direction. We don't want them here. Listen, why don't you wait out by the speeder. We don't want any trouble. I heartily agree with you sir. I suggest a new strategy, Artoo. Let the Wookiee win. Remember, a Jedi can feel the Force flowing through him. You mean it controls your actions? Partially. But it also obeys your commands. Hokey religions and ancient weapons are no match for a good blaster at your side, kid."
@@ -41,10 +43,17 @@ let initialState = {
             comment: "10",
             share: '34'
         },
-    ]
+    ],
+    profile: null
 }
 
-export const profilePageReducer = (state: T_ProfilePage = initialState, action: ActionsType): T_ProfilePage => {
+export type ProfileStateType = {
+    newValueForPost: string
+    posts: Array<PostPropsType>
+    profile: ProfileResponseType | null
+}
+
+export const profilePageReducer = (state: ProfileStateType = initialState, action: ActionsType): ProfileStateType => {
     switch (action.type) {
         case ADD_POST : {
             let newPost = {
@@ -66,6 +75,11 @@ export const profilePageReducer = (state: T_ProfilePage = initialState, action: 
             return  {...state,
                     newValueForPost: action.newText}
         }
+        case SET_USER_PROFILE : {
+            return {...state,
+                profile: action.profile
+            }
+        }
         default:
             return state;
     }
@@ -73,4 +87,5 @@ export const profilePageReducer = (state: T_ProfilePage = initialState, action: 
 
 export const addPostActionCreator = () => ({type: ADD_POST})
 export const changePostValueActionCreator = (text:string) => ({type: ON_CHANGE_POST_VALUE, newText: text })
+export const setUserProfile = (profile:ProfileResponseType) => ({type: SET_USER_PROFILE, profile })
 

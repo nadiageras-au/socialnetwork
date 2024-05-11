@@ -9,6 +9,8 @@ import r2d2 from "../assets/images/avatars/r2d2_droid_icon.png";
 import luke from "../assets/images/avatars/luke_skywalker.png";
 import leia from "../assets/images/avatars/leia_icon.png";
 import yoda from "../assets/images/avatars/yoda_icon.png";
+import {DialogItemProps} from "../layouts/dialogs/dialog/Dialog";
+import {MessageProps} from "../layouts/dialogs/message/Message";
 // export type DialogsType = {
 //     id: number
 //     name: string
@@ -32,7 +34,13 @@ let initialState = {
     ]
 }
 
-export const dialogsPageReducer = (state: T_DialogsPage = initialState, action: ActionsType): T_DialogsPage => {
+export type DialogsStateType = {
+    dialogs: Array<DialogItemProps>
+    newMsg: string
+    messages: Array<MessageProps>
+}
+
+export const dialogsPageReducer = (state: DialogsStateType = initialState, action: ActionsType): DialogsStateType => {
 
     switch (action.type) {
         case ADD_MESSAGE : {
