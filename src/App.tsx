@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./layouts/header/Header";
-import {Profile, ProfileStateProps} from "./layouts/profile/Profile";
+// import {Profile, ProfileStateProps} from "./layouts/profile/Profile";
+import {Profile} from "./layouts/profile/Profile";
 import {Sidebar} from "./layouts/sidebar/Sidebar";
 import {Dialogs, DialogsProps, DialogsStateProps} from "./layouts/dialogs/Dialogs";
 import styled from "styled-components";
@@ -12,10 +13,11 @@ import {Settings} from "./layouts/settings/Settings";
 import {PostPropsType} from "./layouts/profile/myPosts/post/Post";
 import {DialogItemProps} from "./layouts/dialogs/dialog/Dialog";
 import {MessageProps} from "./layouts/dialogs/message/Message";
-import {ProfileContainer} from "./layouts/profile/ProfileContainer";
+// import {ProfileContainer} from "./layouts/profile/ProfileContainer";
 import {DialogsContainer} from "./layouts/dialogs/DialogsContainer";
 import {UsersContainer} from "./layouts/users/UsersContainer";
 import {UserInfo} from "./layouts/userInfo/UserInfo";
+import {store} from "./redux/redux-store";
 
 
 // export type ProfilesPageStateProps = {
@@ -23,15 +25,17 @@ import {UserInfo} from "./layouts/userInfo/UserInfo";
 // }
 
 type AppProps = any & {
-    state: {
-        dialogsPage: DialogsStateProps
-        profilePage: ProfileStateProps
-    }
-    // addPost: (text:string)=> void
-    // onChangePostValue: (text:string) => void
-    addMsg: (text:string)=> void
-    onChangeMsgValue: (text:string) => void
-    dispatch: (action:any) => void
+    store: any
+    // state: {
+    //     dialogsPage: DialogsStateProps
+    //     // profilePage: ProfileStateProps
+    //     profilePage: any
+    // }
+    // // addPost: (text:string)=> void
+    // // onChangePostValue: (text:string) => void
+    // addMsg: (text:string)=> void
+    // onChangeMsgValue: (text:string) => void
+    // dispatch: (action:any) => void
 }
 
 // type StateProps = {
@@ -43,6 +47,7 @@ type AppProps = any & {
 // }
 
 function App(props:AppProps) {
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -50,7 +55,7 @@ function App(props:AppProps) {
                 <Sidebar/>
                 <WrapperContent>
                     <Route exact path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/profile' render={() => <ProfileContainer/>}/>
+                    <Route path='/profile' render={() => <Profile store={props.store}/>}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/events' component={Events}/>

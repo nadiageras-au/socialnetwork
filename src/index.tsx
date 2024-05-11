@@ -13,7 +13,7 @@ import {AppStateType, store} from "./redux/redux-store";
              <Provider store={store}>
                 <GlobalStyle/>
                 {/*<App dispatch={store.dispatch.bind(store)}/>*/}
-                <App/>
+                <App store={store}/>
             </Provider>,
         document.getElementById('root')
     );

@@ -33,7 +33,6 @@ let initialState = {
 }
 
 export const dialogsPageReducer = (state: T_DialogsPage = initialState, action: ActionsType): T_DialogsPage => {
-    // debugger
 
     switch (action.type) {
         case ADD_MESSAGE : {
