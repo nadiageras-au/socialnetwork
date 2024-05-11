@@ -11,14 +11,14 @@ import {User_T} from "../../redux/usersPage-reducer";
 type Response<T = {}> = {
     aboutMe: string
     contacts: {
-        facebook: null| string
-        website: null| string
-        vk: null| string
-        twitter: null| string
-        instagram: null| string
-        youtube: null| string
-        github: null| string
-        mainLink:null| string
+        facebook: null | string
+        website: null | string
+        vk: null | string
+        twitter: null | string
+        instagram: null | string
+        youtube: null | string
+        github: null | string
+        mainLink: null | string
     },
     lookingForAJob: boolean
     lookingForAJobDescription: string
@@ -32,6 +32,7 @@ type Response<T = {}> = {
     // error: null | any
     // totalCount: number
 }
+
 class ProfileAPIComponent extends React.Component<any> {
 
     componentDidMount() {
@@ -44,11 +45,14 @@ class ProfileAPIComponent extends React.Component<any> {
     }
 
     render() {
-        return <div></div>
+        return <Profile posts={this.props.posts}
+                        newValueForPost={this.props.newValueForPost}
+                        addPost={this.props.addPost}
+                        updateNewPostText={this.props.updateNewPostText}/>
     }
 }
 
-let mapStateToProps = (state:MainStateType) => {
+let mapStateToProps = (state: MainStateType) => {
 
     return {
         posts: state.profilePage.posts,
