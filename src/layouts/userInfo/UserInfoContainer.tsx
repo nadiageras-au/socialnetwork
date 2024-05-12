@@ -1,6 +1,5 @@
-import {addPostActionCreator, changePostValueActionCreator} from "../../redux/profilePage-reducer";
+import {addPostActionCreator, changePostValueActionCreator} from "../../redux/profileReducer";
 import {connect} from "react-redux";
-import {MainStateType} from "../../redux/store";
 import {UserInfo} from "./UserInfo";
 
 // export type ProfileStateProps = {

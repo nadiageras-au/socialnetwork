@@ -3,7 +3,7 @@ import {
     addMessageActionCreator,
     changeMessageValueActionCreator,
     DialogsStateType
-} from "../../redux/dialogsPage-reducer";
+} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";

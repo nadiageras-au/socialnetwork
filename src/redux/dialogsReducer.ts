@@ -3,7 +3,6 @@ import {
     ADD_MESSAGE,
     ON_CHANGE_MESSAGE_VALUE,
 } from "../helpers/actionsTypes";
-import {T_DialogsPage, T_ProfilePage} from "./store";
 import chewbacca from "../assets/images/avatars/chewbacca_icon.png";
 import r2d2 from "../assets/images/avatars/r2d2_droid_icon.png";
 import luke from "../assets/images/avatars/luke_skywalker.png";
@@ -40,7 +39,7 @@ export type DialogsStateType = {
     messages: Array<MessageProps>
 }
 
-export const dialogsPageReducer = (state: DialogsStateType = initialState, action: ActionsType): DialogsStateType => {
+export const dialogsReducer = (state: DialogsStateType = initialState, action: ActionsType): DialogsStateType => {
 
     switch (action.type) {
         case ADD_MESSAGE : {

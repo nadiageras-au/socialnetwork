@@ -6,7 +6,7 @@ import {
     setUsers, toggleIsFetching,
     unfollow,
     User_T
-} from "../../redux/usersPage-reducer";
+} from "../../redux/usersReducer";
 import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 import axios, {AxiosResponse} from "axios";

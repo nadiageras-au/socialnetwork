@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import {Post, PostPropsType} from "./post/Post";
+import {Post, T_PostsData} from "./post/Post";
 // import imgPost1 from "../../../assets/images/photos/post01.jpg"
 // import imgPost2 from "../../../assets/images/photos/post02.jpg"
 // import imgPost3_0 from "../../../assets/images/photos/post030.jpg"
@@ -14,7 +14,7 @@ import {Post, PostPropsType} from "./post/Post";
 // const text3 = "Captain. Yes, sir? Tell them we wish to board at once. With all due respect, the Ambassadors for the Supreme Chancellor wish to board immediately. Yes, yes, of course, as you know, our blockade is perfectly legal, and we'd be happy to receive the Ambassador. Noooo! No given up General Ja Ja. Wesa tink of sometin. Hands up! My giv up. My giv up. There's always a bigger fish. The invasion is on schedule, My Lord. I have the Senate bogged down in procedures. They will have no choice but to accept your control of the system."
 
 export type MyPostsType = {
-    posts: Array<PostPropsType>
+    posts: Array<T_PostsData>
 }
 export const MyPosts = (props:MyPostsType) => {
 

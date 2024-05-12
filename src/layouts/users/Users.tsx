@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import {User_T} from "../../redux/usersPage-reducer";
+import {User_T} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 
 const IMG_URL = 'https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1715219430~exp=1715223030~hmac=0dcafb1ada6b1ecf3fc83416a4b2fbc66b28a80ce4737a266d06c1bdf9e9d117&w=996'

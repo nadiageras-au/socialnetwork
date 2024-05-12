@@ -3,18 +3,18 @@ import {
     ADD_POST,
     ON_CHANGE_POST_VALUE, SET_USER_PROFILE
 } from "../helpers/actionsTypes";
-import {T_ProfilePage} from "./store";
+
 import imgPost1 from "../assets/images/photos/post01.jpg";
 import imgPost2 from "../assets/images/photos/post02.jpg";
 import imgPost3_0 from "../assets/images/photos/post030.jpg";
-import {PostPropsType} from "../layouts/profile/myPosts/post/Post";
-import {ProfileResponseType} from "../layouts/profile/ProfileContainer";
+import {T_PostsData} from "../layouts/profile/myPosts/post/Post";
+
 
 const text1 = "Lock on to him, R2. Master, General Grievous's ship is directly ahead Master, General Grievous's ship is directly ahead the one crawling with vulture droids. I see it. Oh, this is going to be easy. Oddball, do you copy? Copy, Red Leader. It's only because I'm so in love. No, it's because I'm so in love with you. So love has blinded you? That's not exactly what I meant. But it's probably true."
 const text2 = "Did you hear that? They've shut down the main reactor. We'll be destroyed for sure. This is madness! We're doomed! There'll be no escape for the Princess this time. What's that? Artoo! Artoo-Detoo, where are you? At last! Where have you been? They're heading in this direction. We don't want them here. Listen, why don't you wait out by the speeder. We don't want any trouble. I heartily agree with you sir. I suggest a new strategy, Artoo. Let the Wookiee win. Remember, a Jedi can feel the Force flowing through him. You mean it controls your actions? Partially. But it also obeys your commands. Hokey religions and ancient weapons are no match for a good blaster at your side, kid."
 const text3 = "Captain. Yes, sir? Tell them we wish to board at once. With all due respect, the Ambassadors for the Supreme Chancellor wish to board immediately. Yes, yes, of course, as you know, our blockade is perfectly legal, and we'd be happy to receive the Ambassador. Noooo! No given up General Ja Ja. Wesa tink of sometin. Hands up! My giv up. My giv up. There's always a bigger fish. The invasion is on schedule, My Lord. I have the Senate bogged down in procedures. They will have no choice but to accept your control of the system."
 
-let initialState = {
+let initialState: ProfileStateType = {
     newValueForPost: '',
     posts: [
         {
@@ -48,12 +48,33 @@ let initialState = {
 }
 
 export type ProfileStateType = {
-    newValueForPost: string
-    posts: Array<PostPropsType>
-    profile: ProfileResponseType | null
+    profile: T_ProfileInfo | null,
+    newValueForPost: string,
+    posts: T_PostsData[]
 }
 
-export const profilePageReducer = (state: ProfileStateType = initialState, action: ActionsType): ProfileStateType => {
+export type T_ProfileInfo = {
+    aboutMe: string;
+    contacts: T_ProfileContacts;
+    lookingForAJob: boolean;
+    lookingForAJobDescription: string;
+    fullName: string;
+    userId: number;
+    photos: T_ProfilePhoto;
+}
+type T_ProfileContacts = {
+    facebook: string;
+    vk: string;
+    twitter: string;
+    instagram: string;
+    github: string;
+}
+type T_ProfilePhoto = {
+    small: string;
+    large: string;
+}
+
+export const profileReducer = (state: ProfileStateType = initialState, action: ActionsType): ProfileStateType => {
     switch (action.type) {
         case ADD_POST : {
             let newPost = {
@@ -87,5 +108,5 @@ export const profilePageReducer = (state: ProfileStateType = initialState, actio
 
 export const addPostActionCreator = () => ({type: ADD_POST})
 export const changePostValueActionCreator = (text:string) => ({type: ON_CHANGE_POST_VALUE, newText: text })
-export const setUserProfile = (profile:ProfileResponseType) => ({type: SET_USER_PROFILE, profile })
+export const setUserProfile = (profile:T_ProfileInfo) => ({type: SET_USER_PROFILE, profile })
 

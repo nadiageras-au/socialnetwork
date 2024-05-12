@@ -4,7 +4,7 @@ import {AvatarImg, DialogItem, DialogItemProps} from "./dialog/Dialog";
 import {Message, MessageProps} from "./message/Message";
 import darth from "./../../assets/images/avatars/darth_vader_icon.png";
 import {ADD_MESSAGE, ON_CHANGE_MESSAGE_VALUE, ON_CHANGE_POST_VALUE} from "../../helpers/actionsTypes";
-import {addMessageActionCreator, changeMessageValueActionCreator} from "../../redux/dialogsPage-reducer";
+import {addMessageActionCreator, changeMessageValueActionCreator} from "../../redux/dialogsReducer";
 
 export type DialogsStateProps = {
     dialogs: Array<DialogItemProps>

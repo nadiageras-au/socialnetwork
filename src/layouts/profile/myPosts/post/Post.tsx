@@ -4,7 +4,7 @@ import {Icon} from "../../../../components/icon/IconSVG";
 import {Image} from "../../../../components/image/Image.styled"
 import avatar from '../../../../assets/images/avatars/jediObiWan.png'
 
-export type PostPropsType = {
+export type T_PostsData = {
     id: number
     text: string
     media: string
@@ -13,7 +13,7 @@ export type PostPropsType = {
     comment: string
     share: string
 }
-export const Post = (props: PostPropsType) => {
+export const Post = (props: T_PostsData) => {
 
     return (
         <StyledPost>

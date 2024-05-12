@@ -34,7 +34,7 @@ export type initialState_T = {
 
 
 
-export const usersPageReducer = (state:initialState_T = initialState , action: UsersActions_T): initialState_T=>{
+export const usersReducer = (state:initialState_T = initialState , action: UsersActions_T): initialState_T=>{
     switch (action.type) {
         case FOLLOW : {
             return {...state,
