@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Logo} from "../../components/logo/Logo";
 import imgSrc from "../../assets/images/logo.svg"
+import {NavLink} from "react-router-dom";
 
 export const Header = () => {
     const logoLink = "https://galerey-room.ru/images/144107_1413628867.png"
@@ -11,6 +12,9 @@ export const Header = () => {
         <StyledHeader>
            <Logo src={imgSrc}/>
            {/*<Logo/>*/}
+            <div>Login block
+            <NavLink to={'/login'}>Login</NavLink>
+            </div>
         </StyledHeader>
     );
 };
