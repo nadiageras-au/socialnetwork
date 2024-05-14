@@ -17,6 +17,7 @@ type UsersProps = {
 }
 
 export const Users = (props: UsersProps) => {
+    debugger
     let pagesCount = Math.ceil(props.totalCount / props.pageSize)
     let pages = []
     for (let i = 1; i < pagesCount; i++) {
@@ -79,5 +80,12 @@ type PageSpanType = any & {
     active: boolean
 }
 const PageSpan = styled.span<PageSpanType>`
-  font-weight: ${props => props.active && 'bold'};;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 2px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 3px;
+  font-weight: ${props => props.active && 'bold'};
+  background-color: ${props => props.active && '#ececec'};
 `

@@ -2,11 +2,13 @@ import React from 'react';
 import {Navbar} from "../navbar/Navbar";
 import {UserInfo} from "../userInfo/UserInfo";
 import styled from "styled-components";
+import {UserInfoContainer} from "../userInfo/UserInfoContainer";
 
 export const Sidebar = () => {
     return (
         <StyledSidebar>
-           <UserInfo/>
+           {/*<UserInfo/>*/}
+           <UserInfoContainer/>
            <Navbar/>
         </StyledSidebar>
     );

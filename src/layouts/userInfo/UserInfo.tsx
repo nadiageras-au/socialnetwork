@@ -12,25 +12,26 @@ import {WrapperSidebarBlock} from "../../components/wrappers/WrapperSidebarBlock
 import {Icon} from "../../components/icon/IconSVG";
 import {useSelector} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
+import {T_ProfileInfo} from "../../redux/profileReducer";
 
 
 type UserInfoProps = {
     name?: string
-    //profile? : ProfileType
+    profile : T_ProfileInfo
 }
-export const UserInfo = (props:UserInfoProps) => {
+export const UserInfo = ({profile}:UserInfoProps) => {
 
     //const profile = useSelector<AppStateType, any>(state => state.profilePage.profile)
-
 
     return (
         <WrapperSidebarBlock>
 
             <AvatarBG>
-                <AvatarImg src={avatarSrc} width="45%" height="auto"/>
+                {/*<AvatarImg src={avatarSrc} width="45%" height="auto"/>*/}
+                <AvatarImg src={profile ? profile.photos.small : avatarSrc} width="45%" height="auto"/>
             </AvatarBG>
             {/*<UserName>Obi-Wan Kenobi</UserName>*/}
-            <UserName>{props.name?props.name:'Obi-Wan Kenobi' }</UserName>
+            <UserName>{profile ? profile.fullName : 'Obi-Wan Kenobi'}</UserName>
             <UserPlace>
                 {/*<Image src={iconMap} width="auto" height={"16px"}/>*/}
                 <Icon iconId='map' width='15px' height='15px'/>
