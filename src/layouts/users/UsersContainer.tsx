@@ -51,7 +51,10 @@ class UsersAPIComponent extends React.Component<any> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
         axios.get<Response<User_T>>
-        (`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        (`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true
+            })
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
@@ -63,7 +66,10 @@ class UsersAPIComponent extends React.Component<any> {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
         axios.get<any>
-        (`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        (`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true,
+            })
             .then(response => {
                 this.props.toggleIsFetching(false)
                 console.log('onPgeChanged', response.data.items)
