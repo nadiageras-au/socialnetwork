@@ -22,10 +22,6 @@ type PathParamsType = {
     userId?: string
 }
 
-type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
-
-type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
-
 type MapStateToPropsType = {
     profile: T_ProfileInfo | null
     posts: T_PostsData[]
@@ -37,6 +33,8 @@ type MapDispatchToPropsType = {
     addPostActionCreator:() => void
     setUserProfile:( profile: T_ProfileInfo)=>void
 }
+type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
+type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
 
 // class ProfileAPIComponent extends React.Component<T_ProfileContainer> {
 class ProfileAPIComponent extends React.Component<PropsType> {
@@ -51,7 +49,7 @@ class ProfileAPIComponent extends React.Component<PropsType> {
         (`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
         // (`https://social-network.samuraijs.com/api/1.0/profile/31116`)
             .then(response => {
-                debugger
+
                 // this.props.toggleIsFetching(false)
                 this.props.setUserProfile(response.data)
             })

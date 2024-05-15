@@ -14,6 +14,7 @@ import {UsersContainer} from "./layouts/users/UsersContainer";
 import {UserInfo} from "./layouts/userInfo/UserInfo";
 import {store} from "./redux/redux-store";
 import {ProfileContainer} from "./layouts/profile/ProfileContainer";
+import HeaderContainer from "./layouts/header/HeaderContainer";
 
 
 // export type ProfilesPageStateProps = {
@@ -47,7 +48,7 @@ function App(props:AppProps) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
-                <Header/>
+                <HeaderContainer/>
                 <Sidebar/>
                 <WrapperContent>
                     <Route exact path='/dialogs' render={() => <DialogsContainer/>}/>

@@ -15,7 +15,8 @@ const initialState: initialState_T = {
     id: null,
     email: null,
     login: null,
-    isFetching: false
+    isFetching: false,
+    isAuth: false
 }
 
 type initialState_T = {
@@ -23,6 +24,7 @@ type initialState_T = {
     email: string | null
     login: string | null
     isFetching: boolean
+    isAuth: boolean
 }
 
 
@@ -31,7 +33,8 @@ export const authReducer = (state: initialState_T = initialState, action: authRe
         case SET_USER_DATA : {
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth: true
             }
         }
 
@@ -42,6 +45,6 @@ export const authReducer = (state: initialState_T = initialState, action: authRe
 }
 
 
-type authReducerActionsType = ReturnType<typeof setUserData>
-export const setUserData = (userId: number, email: string, login: string) => (
+type authReducerActionsType = ReturnType<typeof setAuthUserData>
+export const setAuthUserData = (userId: number, email: string, login: string) => (
     {type: SET_USER_DATA, data: {userId,email, login} }as const)
