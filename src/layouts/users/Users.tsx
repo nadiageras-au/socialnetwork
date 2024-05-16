@@ -3,21 +3,25 @@ import styled from "styled-components";
 import {User_T} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 const IMG_URL = 'https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?t=st=1715219430~exp=1715223030~hmac=0dcafb1ada6b1ecf3fc83416a4b2fbc66b28a80ce4737a266d06c1bdf9e9d117&w=996'
 
-type UsersProps = {
-    totalCount: number
-    users: User_T[]
-    pageSize: number
-    currentPage: number
-    unfollow: (userId: number) => void
-    follow: (userId: number) => void
-    onPageChanged: (pageNumber: number) => void
-    isFetching: boolean
-}
+// type UsersProps = {
+//     totalCount: number
+//     users: User_T[]
+//     pageSize: number
+//     currentPage: number
+//     unfollow: (userId: number) => void
+//     follow: (userId: number) => void
+//     onPageChanged: (pageNumber: number) => void
+//     isFetching: boolean
+//     followingInProgress: boolean
+//     toggleFollowingProgress:any
+// }
 
-export const Users = (props: UsersProps) => {
+// export const Users = (props: UsersProps) => {
+export const Users = (props: any) => {
 
     let pagesCount = Math.ceil(props.totalCount / props.pageSize)
     let pages = []
@@ -52,36 +56,27 @@ export const Users = (props: UsersProps) => {
                 </div>
                 <span>
                     {u.followed
-                        ? <button onClick={() => {
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': "8d3af74f-7eef-4b17-a270-3306d1cf0e57"
-                                    }
-                                })
-                                .then(res => {
-                                    if (res.data.resultCode == 0) {
+                        ? <BtnFollow disabled={props.followingInProgress.some((id: number)=>  id === u.id)} onClick={() => {
+                            props.toggleFollowingInProgress(true,u.id)
+                            usersAPI.unFollowUser(u.id)
+                                .then(data => {
+                                    if (data.resultCode == 0) {
                                         props.unfollow(u.id)
                                     }
+                                    props.toggleFollowingInProgress(false,u.id)
                                 })
 
-                        }}>Unfollow</button>
-                        : <button onClick={() => {
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},
-                                {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': "8d3af74f-7eef-4b17-a270-3306d1cf0e57"
-                                    }
-                                })
-                                .then(res => {
-                                    if (res.data.resultCode == 0) {
+                        }}>Unfollow</BtnFollow>
+                        : <BtnFollow disabled={props.followingInProgress.some((id: number)=> id === u.id)} onClick={() => {
+                            props.toggleFollowingInProgress(true, u.id)
+                            usersAPI.followUser(u.id)
+                                .then(data => {
+                                    if (data.resultCode == 0) {
                                         props.follow(u.id)
                                     }
+                                    props.toggleFollowingInProgress(false, u.id)
                                 })
-
-                        }}>Follow</button>
+                        }}>Follow</BtnFollow>
                     }
 
                 </span>
@@ -113,4 +108,16 @@ const PageSpan = styled.span<PageSpanType>`
   padding: 3px;
   font-weight: ${props => props.active && 'bold'};
   background-color: ${props => props.active && '#ececec'};
+`
+
+const BtnFollow = styled.button<any>`
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 2px;
+  margin-bottom: 5px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 3px;
+  font-weight:  bold;
+  background-color: #ececec;
 `
